@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { formatCategory } from '@/lib/types';
 
 interface BookmarkItem {
   arxiv_id: string;
@@ -176,7 +177,7 @@ export default function ProfilePage() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
                 {profile.research_interests.map((cat) => (
                   <div key={cat} className="paper-card-minimal" style={{ padding: '20px', alignItems: 'center', textAlign: 'center' }}>
-                    <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>{cat}</div>
+                    <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>{formatCategory(cat)}</div>
                     <div style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase' }}>Subscribed</div>
                   </div>
                 ))}
@@ -206,7 +207,7 @@ export default function ProfilePage() {
                   className="filter-chip-minimal"
                   style={{ textDecoration: 'none' }}
                 >
-                  {interest}
+                  {formatCategory(interest)}
                 </Link>
               ))}
             </div>

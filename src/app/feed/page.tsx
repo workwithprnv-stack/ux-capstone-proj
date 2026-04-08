@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Paper, ARXIV_CATEGORIES } from '@/lib/types';
+import { Paper, ARXIV_CATEGORIES, formatCategory } from '@/lib/types';
 import PaperCard from '@/components/PaperCard';
 
 const ALL_CATEGORIES = Object.entries(ARXIV_CATEGORIES);
@@ -103,7 +103,7 @@ export default function FeedPage() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
               {subscribedTopics.map((code) => (
                 <div key={code} className="filter-chip-minimal active" onClick={() => toggleTopic(code)}>
-                  {code} <span style={{ marginLeft: '4px', opacity: 0.5 }}>✕</span>
+                  {formatCategory(code)} <span style={{ marginLeft: '4px', opacity: 0.5 }}>✕</span>
                 </div>
               ))}
               {subscribedTopics.length === 0 && (
@@ -136,7 +136,7 @@ export default function FeedPage() {
                     }}
                   >
                     <span>{name}</span>
-                    <span style={{ fontSize: '10px', color: isSubscribed ? '#444' : '#333' }}>{code}</span>
+                    <span style={{ fontSize: '10px', color: isSubscribed ? '#444' : '#333' }}>{formatCategory(code)}</span>
                   </div>
                 );
               })}

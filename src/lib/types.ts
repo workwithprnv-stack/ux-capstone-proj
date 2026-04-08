@@ -69,6 +69,16 @@ export interface TopicSubscription {
   subscribed_at: string;
 }
 
+/**
+ * Strips the arXiv prefix from a category code for cleaner display.
+ * e.g., 'cs.AI' -> 'AI', 'stat.ML' -> 'ML'
+ */
+export function formatCategory(category: string): string {
+  if (!category) return '';
+  const parts = category.split('.');
+  return parts.length > 1 ? parts[1] : category;
+}
+
 // arXiv category mapping
 export const ARXIV_CATEGORIES: Record<string, string> = {
   'cs.AI': 'Artificial Intelligence',

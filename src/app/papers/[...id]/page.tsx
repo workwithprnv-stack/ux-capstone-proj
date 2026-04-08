@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Paper, ARXIV_CATEGORIES } from '@/lib/types';
+import { Paper, ARXIV_CATEGORIES, formatCategory } from '@/lib/types';
 import BookmarkButton from '@/components/BookmarkButton';
 import CitationGraph from '@/components/CitationGraph';
 import PaperCard from '@/components/PaperCard';
@@ -166,7 +166,9 @@ export default function PaperDetailPage() {
             </h3>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
               {paper.categories.map((cat) => (
-                <span key={cat} style={{ fontSize: '11px', color: '#666', border: '1px solid #222', padding: '2px 8px', borderRadius: '4px' }}>{cat}</span>
+                <span key={cat} style={{ fontSize: '11px', color: '#666', border: '1px solid #222', padding: '2px 8px', borderRadius: '4px' }}>
+                  {formatCategory(cat)}
+                </span>
               ))}
             </div>
           </div>

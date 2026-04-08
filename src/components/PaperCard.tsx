@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Paper } from '@/lib/types';
+import { Paper, formatCategory } from '@/lib/types';
 import BookmarkButton from './BookmarkButton';
 import { getGravatarUrl, getFallbackAvatarUrl } from '@/lib/gravatar';
 
@@ -50,7 +50,9 @@ export default function PaperCard({ paper }: PaperCardProps) {
       <div style={{ marginTop: 'auto', paddingTop: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', gap: '8px' }}>
           {paper.categories.slice(0, 2).map((cat) => (
-            <span key={cat} style={{ fontSize: '11px', color: '#666', border: '1px solid #222', padding: '2px 8px', borderRadius: '4px' }}>{cat}</span>
+            <span key={cat} style={{ fontSize: '11px', color: '#666', border: '1px solid #222', padding: '2px 8px', borderRadius: '4px' }}>
+              {formatCategory(cat)}
+            </span>
           ))}
         </div>
         

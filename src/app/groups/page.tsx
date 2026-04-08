@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { formatCategory } from '@/lib/types';
 
 interface GroupItem {
   id: string;
