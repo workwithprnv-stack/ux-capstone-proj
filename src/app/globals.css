@@ -1829,6 +1829,7 @@ textarea.form-input {
   font-weight: 600;
   line-height: 1.4;
   color: #ffffff;
+  text-decoration: none;
 }
 
 .paper-meta-minimal {
