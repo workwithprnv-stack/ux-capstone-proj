@@ -45,161 +45,182 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="profile-page" id="profile-page">
-      {/* Profile Header */}
-      <div className="profile-header" id="profile-header">
-        <div className="profile-avatar">
-          {profile.full_name.charAt(0)}
-        </div>
-        <div className="profile-info">
-          <h1 className="profile-name">{profile.full_name}</h1>
-          <div className="profile-username">@{profile.username}</div>
-          <p className="profile-bio">{profile.bio}</p>
-          <div className="profile-interests">
-            {profile.research_interests.map((interest) => (
-              <Link
-                key={interest}
-                href={`/papers?category=${interest}`}
-                className="badge badge-category"
-                style={{ textDecoration: 'none' }}
-              >
-                {interest}
-              </Link>
-            ))}
-          </div>
-        </div>
-        <button
-          className="btn btn-secondary btn-sm"
-          onClick={() => setIsEditing(!isEditing)}
-        >
-          {isEditing ? 'Cancel' : '✏️ Edit'}
-        </button>
-      </div>
-
-      {/* Edit Form */}
-      {isEditing && (
-        <div className="sidebar-card" style={{ marginBottom: 'var(--space-xl)' }}>
-          <h3 className="modal-title">Edit Profile</h3>
-          <div className="form-group">
-            <label className="form-label">Full Name</label>
-            <input className="form-input" defaultValue={profile.full_name} id="edit-fullname" />
-          </div>
-          <div className="form-group">
-            <label className="form-label">Username</label>
-            <input className="form-input" defaultValue={profile.username} id="edit-username" />
-          </div>
-          <div className="form-group">
-            <label className="form-label">Bio</label>
-            <textarea className="form-input" defaultValue={profile.bio} rows={3} id="edit-bio" />
-          </div>
-          <div className="form-group">
-            <label className="form-label">Research Interests (comma-separated arXiv categories)</label>
-            <input
-              className="form-input"
-              defaultValue={profile.research_interests.join(', ')}
-              placeholder="cs.AI, cs.LG, stat.ML"
-              id="edit-interests"
-            />
-          </div>
-          <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
-            <button className="btn btn-primary btn-sm" onClick={() => setIsEditing(false)}>
-              Save Changes
-            </button>
-            <button className="btn btn-ghost btn-sm" onClick={() => setIsEditing(false)}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Tabs */}
-      <div className="profile-tabs" id="profile-tabs">
-        <button
-          className={`profile-tab ${activeTab === 'bookmarks' ? 'active' : ''}`}
-          onClick={() => setActiveTab('bookmarks')}
-        >
-          📑 Bookmarks ({DEMO_BOOKMARKS.length})
-        </button>
-        <button
-          className={`profile-tab ${activeTab === 'subscriptions' ? 'active' : ''}`}
-          onClick={() => setActiveTab('subscriptions')}
-        >
-          📡 Subscriptions ({profile.research_interests.length})
-        </button>
-        <button
-          className={`profile-tab ${activeTab === 'groups' ? 'active' : ''}`}
-          onClick={() => setActiveTab('groups')}
-        >
-          👥 Groups
-        </button>
-      </div>
-
-      {/* Tab Content */}
-      {activeTab === 'bookmarks' && (
-        <div className="papers-grid" id="bookmarks-list">
-          {DEMO_BOOKMARKS.map((bm) => (
-            <div key={bm.arxiv_id} className="paper-card">
-              <div className="paper-card-header">
-                <Link
-                  href={`/papers/${encodeURIComponent(bm.arxiv_id)}`}
-                  className="paper-title"
-                  style={{ textDecoration: 'none' }}
-                >
-                  {bm.title}
-                </Link>
-                <button className="bookmark-btn active" title="Remove bookmark">★</button>
+    <div className="page-minimal" id="profile-page">
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '60px' }}>
+        {/* Main Content Area */}
+        <div>
+          {/* Profile Header Block */}
+          <div className="page-header-minimal" style={{ marginBottom: '48px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '24px' }}>
+              <div style={{ 
+                width: '64px', 
+                height: '64px', 
+                background: '#fff', 
+                color: '#000', 
+                borderRadius: '50%', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                fontSize: '24px', 
+                fontWeight: '700' 
+              }}>
+                {profile.full_name.charAt(0)}
               </div>
-              <div className="paper-meta">
-                <span className="paper-authors">{bm.authors}</span>
-                <span style={{ color: 'var(--text-tertiary)' }}>·</span>
-                <span className="paper-date">Saved {new Date(bm.saved_at).toLocaleDateString()}</span>
+              <div>
+                <h1 className="section-title-minimal" style={{ fontSize: '32px', marginBottom: '4px' }}>{profile.full_name}</h1>
+                <div style={{ color: '#666', fontSize: '14px' }}>@{profile.username}</div>
+              </div>
+              <button
+                className="btn-premium-minimal secondary"
+                style={{ marginLeft: 'auto' }}
+                onClick={() => setIsEditing(!isEditing)}
+              >
+                {isEditing ? 'Cancel' : 'Edit Profile'}
+              </button>
+            </div>
+            <p className="section-subtitle-minimal" style={{ maxWidth: '600px', lineHeight: '1.6' }}>{profile.bio}</p>
+          </div>
+
+          {/* Edit Form Island */}
+          {isEditing && (
+            <div style={{ background: '#0a0a0a', border: '1px solid #1a1a1a', borderRadius: '16px', padding: '32px', marginBottom: '48px' }}>
+              <h3 className="section-title-minimal" style={{ fontSize: '18px', marginBottom: '24px' }}>Update Identity</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Name</label>
+                  <input className="search-input-modern" style={{ height: '40px', background: '#000', border: '1px solid #222' }} defaultValue={profile.full_name} />
+                </div>
+                <div className="form-group">
+                  <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Handle</label>
+                  <input className="search-input-modern" style={{ height: '40px', background: '#000', border: '1px solid #222' }} defaultValue={profile.username} />
+                </div>
+              </div>
+              <div className="form-group" style={{ marginBottom: '24px' }}>
+                <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Biography</label>
+                <textarea className="search-input-modern" style={{ height: '80px', background: '#000', border: '1px solid #222', paddingTop: '10px' }} defaultValue={profile.bio} />
+              </div>
+              <div style={{ display: 'flex', gap: '12px', marginTop: '32px' }}>
+                <button className="btn-premium-minimal" onClick={() => setIsEditing(false)}>Save Identity</button>
+                <button className="btn-premium-minimal secondary" onClick={() => setIsEditing(false)}>Discard</button>
               </div>
             </div>
-          ))}
-        </div>
-      )}
+          )}
 
-      {activeTab === 'subscriptions' && (
-        <div className="categories-grid">
-          {profile.research_interests.map((cat) => (
-            <Link
-              key={cat}
-              href={`/papers?category=${cat}`}
-              className="category-card"
-              style={{ textDecoration: 'none' }}
+          {/* Tabs Navigation */}
+          <div style={{ display: 'flex', gap: '32px', borderBottom: '1px solid #1a1a1a', marginBottom: '40px' }}>
+            <button
+              onClick={() => setActiveTab('bookmarks')}
+              style={{ 
+                padding: '12px 0', 
+                fontSize: '14px', 
+                color: activeTab === 'bookmarks' ? '#fff' : '#444', 
+                borderBottom: `2px solid ${activeTab === 'bookmarks' ? '#fff' : 'transparent'}`,
+                background: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
             >
-              <div className="category-code">{cat}</div>
-              <div className="category-name">Subscribed</div>
-            </Link>
-          ))}
-          <Link
-            href="/feed"
-            className="category-card"
-            style={{
-              textDecoration: 'none',
-              borderStyle: 'dashed',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-              color: 'var(--text-tertiary)',
-            }}
-          >
-            + Manage topics
-          </Link>
-        </div>
-      )}
+              Bookmarks
+            </button>
+            <button
+              onClick={() => setActiveTab('subscriptions')}
+              style={{ 
+                padding: '12px 0', 
+                fontSize: '14px', 
+                color: activeTab === 'subscriptions' ? '#fff' : '#444', 
+                borderBottom: `2px solid ${activeTab === 'subscriptions' ? '#fff' : 'transparent'}`,
+                background: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+            >
+              Subscriptions
+            </button>
+            <button
+              onClick={() => setActiveTab('groups')}
+              style={{ 
+                padding: '12px 0', 
+                fontSize: '14px', 
+                color: activeTab === 'groups' ? '#fff' : '#444', 
+                borderBottom: `2px solid ${activeTab === 'groups' ? '#fff' : 'transparent'}`,
+                background: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+            >
+              Collaboration
+            </button>
+          </div>
 
-      {activeTab === 'groups' && (
-        <div className="empty-state">
-          <div className="empty-state-icon">👥</div>
-          <div className="empty-state-title">No groups yet</div>
-          <div className="empty-state-text">Join or create a research group to collaborate with peers</div>
-          <Link href="/groups" className="btn btn-primary">
-            Browse Groups
-          </Link>
+          {/* Tab Content */}
+          <div style={{ minHeight: '400px' }}>
+            {activeTab === 'bookmarks' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {DEMO_BOOKMARKS.map((bm) => (
+                  <div key={bm.arxiv_id} className="paper-card-minimal">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <Link href={`/papers/${bm.arxiv_id}`} className="paper-title-minimal" style={{ fontSize: '15px' }}>{bm.title}</Link>
+                      <button style={{ background: 'none', border: 'none', color: '#fff', fontSize: '18px', cursor: 'pointer' }}>★</button>
+                    </div>
+                    <div className="paper-meta-minimal">
+                      <span>{bm.authors}</span>
+                      <span style={{ color: '#333' }}>·</span>
+                      <span style={{ color: '#666' }}>Saved {new Date(bm.saved_at).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {activeTab === 'subscriptions' && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
+                {profile.research_interests.map((cat) => (
+                  <div key={cat} className="paper-card-minimal" style={{ padding: '20px', alignItems: 'center', textAlign: 'center' }}>
+                    <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>{cat}</div>
+                    <div style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase' }}>Subscribed</div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {activeTab === 'groups' && (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '300px', border: '1px dashed #222', borderRadius: '16px' }}>
+                <div style={{ fontSize: '14px', color: '#666', marginBottom: '16px' }}>No research clusters joined</div>
+                <Link href="/groups" className="filter-chip-minimal active">Explore Clusters</Link>
+              </div>
+            )}
+          </div>
         </div>
-      )}
+
+        {/* Sidebar */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+          <div>
+            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+              Research Focus
+            </h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {profile.research_interests.map((interest) => (
+                <Link
+                  key={interest}
+                  href={`/papers?category=${interest}`}
+                  className="filter-chip-minimal"
+                  style={{ textDecoration: 'none' }}
+                >
+                  {interest}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ padding: '24px', background: '#ffffff', borderRadius: '16px', color: '#000' }}>
+            <h4 style={{ fontSize: '13px', fontWeight: '700', marginBottom: '12px' }}>Pro Upgrade</h4>
+            <p style={{ fontSize: '12px', lineHeight: '1.5', marginBottom: '16px', opacity: 0.8 }}>Access deeper citation graphs and collaboration tools.</p>
+            <button className="btn-premium-minimal dark" style={{ width: '100%', marginTop: '8px' }}>
+              Upgrade Now
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

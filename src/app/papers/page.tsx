@@ -57,21 +57,23 @@ function PapersContent() {
   const totalPages = Math.ceil(totalResults / maxResults);
 
   return (
-    <div className="search-page" id="papers-page">
-      <div className="search-page-header">
-        <h1 className="section-title">
+    <div className="page-minimal" id="papers-page">
+      <div className="page-header-minimal">
+        <h1 className="section-title-minimal">
           {query ? `Results for "${query}"` : activeCategory ? `Papers in ${ARXIV_CATEGORIES[activeCategory] || activeCategory}` : 'Search Papers'}
         </h1>
-        <p className="section-subtitle" style={{ marginBottom: 'var(--space-xl)' }}>
+        <p className="section-subtitle-minimal" style={{ marginBottom: '32px' }}>
           Search millions of arXiv papers across all research fields
         </p>
-        <SearchBar defaultValue={query} />
+        <div style={{ maxWidth: '600px' }}>
+          <SearchBar defaultValue={query} />
+        </div>
       </div>
 
       {/* Category Filters */}
-      <div className="search-filters" id="category-filters">
+      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '40px' }} id="category-filters">
         <button
-          className={`filter-chip ${!activeCategory ? 'active' : ''}`}
+          className={`filter-chip-minimal ${!activeCategory ? 'active' : ''}`}
           onClick={() => { setActiveCategory(''); setPage(0); }}
         >
           All
@@ -79,7 +81,7 @@ function PapersContent() {
         {FILTER_CATEGORIES.map((cat) => (
           <button
             key={cat}
-            className={`filter-chip ${activeCategory === cat ? 'active' : ''}`}
+            className={`filter-chip-minimal ${activeCategory === cat ? 'active' : ''}`}
             onClick={() => { setActiveCategory(cat); setPage(0); }}
           >
             {cat}
@@ -89,10 +91,11 @@ function PapersContent() {
 
       {/* Results Info */}
       {(query || activeCategory) && !loading && (
-        <div className="search-results-info">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', fontSize: '14px', color: '#666' }}>
           <span>{totalResults.toLocaleString()} results found</span>
           <select
             className="sort-select"
+            style={{ background: 'transparent', color: '#fff', border: '1px solid #333', borderRadius: '40px', padding: '4px 12px', outline: 'none' }}
             value={sortBy}
             onChange={(e) => { setSortBy(e.target.value); setPage(0); }}
             id="sort-select"
@@ -104,56 +107,41 @@ function PapersContent() {
         </div>
       )}
 
-      {/* Loading */}
-      {loading && (
-        <div className="loading-container">
-          <div className="loading-spinner" />
-          <span className="loading-text">Searching arXiv...</span>
-        </div>
-      )}
-
-      {/* Results */}
-      {!loading && papers.length > 0 && (
-        <div className="papers-grid" id="papers-list">
-          {papers.map((paper) => (
+      {/* Results grid */}
+      <div className="papers-grid" id="papers-list">
+        {loading ? (
+          <div className="loading-container" style={{ gridColumn: '1 / -1', padding: '100px 0' }}>
+            <div className="loading-spinner" />
+            <span className="loading-text">Searching arXiv...</span>
+          </div>
+        ) : papers.length > 0 ? (
+          papers.map((paper) => (
             <PaperCard key={paper.id} paper={paper} />
-          ))}
-        </div>
-      )}
-
-      {/* Empty State */}
-      {!loading && papers.length === 0 && (query || activeCategory) && (
-        <div className="empty-state">
-          <div className="empty-state-icon">📭</div>
-          <div className="empty-state-title">No papers found</div>
-          <div className="empty-state-text">Try adjusting your search terms or filters</div>
-        </div>
-      )}
-
-      {/* Initial State */}
-      {!loading && papers.length === 0 && !query && !activeCategory && (
-        <div className="empty-state">
-          <div className="empty-state-icon">🔬</div>
-          <div className="empty-state-title">Start Exploring</div>
-          <div className="empty-state-text">Search for a topic or select a category above to discover papers</div>
-        </div>
-      )}
+          ))
+        ) : (query || activeCategory) && (
+          <div className="empty-state" style={{ gridColumn: '1 / -1' }}>
+            <div className="empty-state-icon">📭</div>
+            <div className="empty-state-title">No papers found</div>
+            <div className="empty-state-text">Try adjusting your search terms or filters</div>
+          </div>
+        )}
+      </div>
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="pagination" id="pagination">
+        <div className="pagination" id="pagination" style={{ marginTop: '60px', display: 'flex', justifyContent: 'center', gap: '32px' }}>
           <button
-            className="btn btn-secondary btn-sm"
+            className="filter-chip-minimal"
             disabled={page === 0}
             onClick={() => setPage(p => Math.max(0, p - 1))}
           >
             ← Previous
           </button>
-          <span style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem', alignSelf: 'center' }}>
+          <span style={{ color: '#666', fontSize: '14px', alignSelf: 'center' }}>
             Page {page + 1} of {Math.min(totalPages, 100)}
           </span>
           <button
-            className="btn btn-secondary btn-sm"
+            className="filter-chip-minimal"
             disabled={page >= totalPages - 1 || page >= 99}
             onClick={() => setPage(p => p + 1)}
           >

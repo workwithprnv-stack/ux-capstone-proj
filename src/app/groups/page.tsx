@@ -74,105 +74,98 @@ export default function GroupsPage() {
   );
 
   return (
-    <div className="groups-page" id="groups-page">
-      <div className="section-header">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <div>
-            <h1 className="section-title">Research Groups</h1>
-            <p className="section-subtitle">Join a group to collaborate, share papers, and discuss research</p>
-          </div>
-          <button
-            className="btn btn-primary"
-            onClick={() => setShowCreateModal(true)}
-            id="create-group-btn"
-          >
-            + Create Group
-          </button>
+    <div className="page-minimal" id="groups-page">
+      <div className="page-header-minimal" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1 className="section-title-minimal">Research Clusters</h1>
+          <p className="section-subtitle-minimal">Synchronize with peers and co-search specific fields</p>
+        </div>
+        <button
+          className="filter-chip-minimal active"
+          onClick={() => setShowCreateModal(true)}
+          id="create-group-btn"
+        >
+          Initialize Cluster
+        </button>
+      </div>
+
+      {/* Search/Filter Area */}
+      <div style={{ marginBottom: '60px', maxWidth: '400px' }}>
+        <div className="search-wrapper-modern" style={{ height: '40px' }}>
+          <span className="search-icon-modern">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input
+            className="search-input-modern"
+            placeholder="Search clusters..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            id="groups-search"
+          />
         </div>
       </div>
 
-      {/* Search/Filter */}
-      <div style={{ marginBottom: 'var(--space-xl)' }}>
-        <input
-          className="form-input"
-          placeholder="Search groups..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ maxWidth: '400px' }}
-          id="groups-search"
-        />
-      </div>
-
-      {/* Groups Grid */}
-      <div className="groups-grid" id="groups-list">
+      {/* Groups Minimal Grid */}
+      <div className="papers-grid" id="groups-list">
         {filteredGroups.map((group) => (
-          <div key={group.id} className="group-card">
-            <h3 className="group-card-title">{group.name}</h3>
-            <p className="group-card-desc">{group.description}</p>
-            <div className="group-card-footer">
-              <span>👥 {group.member_count} members</span>
-              <span>Created by {group.creator_name}</span>
-            </div>
-            <div style={{ marginTop: 'var(--space-md)', display: 'flex', gap: 'var(--space-sm)' }}>
-              <button className="btn btn-primary btn-sm" style={{ flex: 1 }}>
-                Join Group
-              </button>
-              <button className="btn btn-secondary btn-sm">
-                View
-              </button>
+          <div key={group.id} className="paper-card-minimal" style={{ padding: '32px' }}>
+            <h3 className="paper-title-minimal" style={{ fontSize: '18px', marginBottom: '16px' }}>{group.name}</h3>
+            <p className="paper-abstract-minimal" style={{ marginBottom: '24px', WebkitLineClamp: '3' }}>{group.description}</p>
+            
+            <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ fontSize: '11px', color: '#444', textTransform: 'uppercase' }}>
+                {group.member_count} synchronizing
+              </div>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <button className="nav-link-minimal" style={{ fontSize: '12px', borderBottom: '1px solid #222' }}>Join</button>
+                <button className="nav-link-minimal" style={{ fontSize: '12px', color: '#fff' }}>Open ↗</button>
+              </div>
             </div>
           </div>
         ))}
+
+        {filteredGroups.length === 0 && (
+          <div className="empty-state" style={{ gridColumn: '1 / -1' }}>
+            <div className="empty-state-icon">🔍</div>
+            <div className="empty-state-title">No clusters localized</div>
+            <div className="empty-state-text">Try adjusting your filters or initialize a new research cluster.</div>
+          </div>
+        )}
       </div>
 
-      {filteredGroups.length === 0 && (
-        <div className="empty-state">
-          <div className="empty-state-icon">🔍</div>
-          <div className="empty-state-title">No groups found</div>
-          <div className="empty-state-text">Try adjusting your search or create a new group</div>
-        </div>
-      )}
-
-      {/* Create Group Modal */}
+      {/* Modern Modal Island */}
       {showCreateModal && (
-        <div className="modal-overlay" onClick={() => setShowCreateModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()} id="create-group-modal">
-            <h2 className="modal-title">Create Research Group</h2>
-            <div className="form-group">
-              <label className="form-label">Group Name</label>
-              <input className="form-input" placeholder="e.g., Quantum Machine Learning" id="group-name-input" />
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowCreateModal(false)}>
+          <div style={{ width: '480px', background: '#0a0a0a', border: '1px solid #1a1a1a', borderRadius: '24px', padding: '40px' }} onClick={(e) => e.stopPropagation()} id="create-group-modal">
+            <h2 className="section-title-minimal" style={{ fontSize: '20px', marginBottom: '32px' }}>Initialize Cluster</h2>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              <div className="form-group">
+                <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Cluster Name</label>
+                <input className="search-input-modern" style={{ height: '40px', background: '#000', border: '1px solid #222' }} placeholder="e.g. Neural Dynamics" />
+              </div>
+
+              <div className="form-group">
+                <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Mission Statement</label>
+                <textarea 
+                  className="search-input-modern" 
+                  style={{ height: '100px', background: '#000', border: '1px solid #222', paddingTop: '12px' }} 
+                  placeholder="Define the synchronization goals..." 
+                />
+              </div>
+
+              <div className="form-group">
+                <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Fields of Interest</label>
+                <input className="search-input-modern" style={{ height: '40px', background: '#000', border: '1px solid #222' }} placeholder="cs.AI, quant-ph..." />
+              </div>
             </div>
-            <div className="form-group">
-              <label className="form-label">Description</label>
-              <textarea
-                className="form-input"
-                placeholder="Describe the focus and goals of your research group..."
-                rows={4}
-                id="group-desc-input"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Topics (optional)</label>
-              <input
-                className="form-input"
-                placeholder="e.g., cs.AI, quant-ph"
-                id="group-topics-input"
-              />
-              <div className="form-hint">Comma-separated arXiv categories</div>
-            </div>
-            <div style={{ display: 'flex', gap: 'var(--space-sm)', justifyContent: 'flex-end' }}>
-              <button
-                className="btn btn-ghost"
-                onClick={() => setShowCreateModal(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="btn btn-primary"
-                onClick={() => setShowCreateModal(false)}
-              >
-                Create Group
-              </button>
+
+            <div style={{ display: 'flex', gap: '16px', marginTop: '40px', justifyContent: 'flex-end' }}>
+              <button className="nav-link-minimal" onClick={() => setShowCreateModal(false)}>Discard</button>
+              <button className="filter-chip-minimal active" onClick={() => setShowCreateModal(false)}>Initialize</button>
             </div>
           </div>
         </div>

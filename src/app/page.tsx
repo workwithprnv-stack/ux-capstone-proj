@@ -1,116 +1,67 @@
-import Link from 'next/link';
-import SearchBar from '@/components/SearchBar';
-import { ARXIV_CATEGORIES } from '@/lib/types';
+'use client';
 
-const FEATURED_CATEGORIES = [
-  'cs.AI', 'cs.LG', 'cs.CV', 'cs.CL', 'cs.NE', 'cs.RO',
-  'cs.SE', 'cs.CR', 'stat.ML', 'math.OC', 'q-bio.NC', 'eess.IV',
-];
+import Link from 'next/link';
+import { useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
+import AsciiSphere from '@/components/AsciiSphere';
 
 export default function HomePage() {
+  const [query, setQuery] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) {
+      router.push(`/papers?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
   return (
-    <main>
-      {/* Hero Section */}
-      <section className="hero" id="hero-section">
-        <div className="hero-content">
-          <div className="hero-badge">
-            ⚡ Powered by arXiv Open Access
+    <div className="home-minimal" id="home-page">
+      {/* Background/Visual Decorations */}
+      <AsciiSphere />
+      
+      {/* Main Content Area */}
+      <main className="home-main">
+        <form onSubmit={handleSubmit} className="search-section">
+          <div className="search-wrapper-modern">
+            <span className="search-icon-modern">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              className="search-input-modern" 
+              placeholder="Search" 
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              autoFocus
+            />
+            <span className="shortcut-hint">⌘ /</span>
           </div>
+        </form>
+      </main>
 
-          <h1 className="hero-title">
-            Discover, Share &{' '}
-            <span className="hero-title-gradient">Collaborate</span>{' '}
-            on regex
-          </h1>
-
-          <p className="hero-subtitle">
-            Your intelligent regex companion. Search millions of arXiv papers,
-            bookmark discoveries, follow topics, and collaborate with researchers worldwide.
-          </p>
-
-          <div className="hero-search">
-            <SearchBar placeholder="Search papers, authors, or topics..." size="large" />
-          </div>
-
-          <div className="hero-stats">
-            <div className="hero-stat">
-              <span className="hero-stat-value">2.4M+</span>
-              <span className="hero-stat-label">Papers Indexed</span>
-            </div>
-            <div className="hero-stat">
-              <span className="hero-stat-value">150+</span>
-              <span className="hero-stat-label">Research Fields</span>
-            </div>
-            <div className="hero-stat">
-              <span className="hero-stat-value">Free</span>
-              <span className="hero-stat-label">Open Access</span>
-            </div>
-          </div>
+      {/* Footer Area */}
+      <footer className="home-footer-minimal">
+        <div className="copyright">
+          © 2026 Nano
         </div>
-      </section>
+        
+        <nav className="footer-nav">
+          <Link href="/about">About</Link>
+          <Link href="/support">Support</Link>
+          <Link href="/contact">Contact Us</Link>
+        </nav>
+      </footer>
 
-      {/* Featured Categories */}
-      <section className="section" id="categories-section">
-        <div className="section-header">
-          <h2 className="section-title">Browse by Topic</h2>
-          <p className="section-subtitle">Explore the latest research across popular fields</p>
-        </div>
-
-        <div className="categories-grid">
-          {FEATURED_CATEGORIES.map((code) => (
-            <Link
-              key={code}
-              href={`/papers?category=${code}`}
-              className="category-card"
-              id={`category-${code.replace('.', '-')}`}
-            >
-              <div className="category-code">{code}</div>
-              <div className="category-name">{ARXIV_CATEGORIES[code]}</div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="section" id="features-section">
-        <div className="section-header">
-          <h2 className="section-title">Why regex?</h2>
-          <p className="section-subtitle">Everything you need for modern regex collaboration</p>
-        </div>
-
-        <div className="categories-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
-          <div className="category-card">
-            <div style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)' }}>🔍</div>
-            <div className="category-code" style={{ fontSize: '1rem', marginBottom: 'var(--space-xs)' }}>Smart Search</div>
-            <div className="category-name">Search millions of arXiv papers with advanced filters by topic, author, and date.</div>
-          </div>
-          <div className="category-card">
-            <div style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)' }}>📑</div>
-            <div className="category-code" style={{ fontSize: '1rem', marginBottom: 'var(--space-xs)' }}>Bookmarks</div>
-            <div className="category-name">Save papers to your personal library for quick access later.</div>
-          </div>
-          <div className="category-card">
-            <div style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)' }}>📡</div>
-            <div className="category-code" style={{ fontSize: '1rem', marginBottom: 'var(--space-xs)' }}>Topic Feed</div>
-            <div className="category-name">Subscribe to topics and get a personalized feed of the latest papers.</div>
-          </div>
-          <div className="category-card">
-            <div style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)' }}>👥</div>
-            <div className="category-code" style={{ fontSize: '1rem', marginBottom: 'var(--space-xs)' }}>Groups</div>
-            <div className="category-name">Create research groups, share papers, and collaborate with peers.</div>
-          </div>
-          <div className="category-card">
-            <div style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)' }}>👤</div>
-            <div className="category-code" style={{ fontSize: '1rem', marginBottom: 'var(--space-xs)' }}>Profiles</div>
-            <div className="category-name">Build your researcher profile and connect with other scientists.</div>
-          </div>
-          <div className="category-card">
-            <div style={{ fontSize: '1.5rem', marginBottom: 'var(--space-sm)' }}>🔓</div>
-            <div className="category-code" style={{ fontSize: '1rem', marginBottom: 'var(--space-xs)' }}>Open Access</div>
-            <div className="category-name">All papers are freely accessible. No paywalls, no subscriptions needed.</div>
-          </div>
-        </div>
-      </section>
-    </main>
+      <style jsx global>{`
+        .footer {
+          display: none !important;
+        }
+      `}</style>
+    </div>
   );
 }

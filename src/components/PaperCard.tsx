@@ -18,68 +18,57 @@ export default function PaperCard({ paper }: PaperCardProps) {
   const hasMore = paper.authors.length > 4;
 
   return (
-    <div className="paper-card" id={`paper-card-${paper.id}`}>
-      <div className="paper-card-header">
-        <Link href={`/papers/${encodeURIComponent(paper.id)}`} className="paper-title" style={{ textDecoration: 'none' }}>
+    <div className="paper-card-minimal" id={`paper-card-${paper.id}`}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px' }}>
+        <Link href={`/papers/${encodeURIComponent(paper.id)}`} className="paper-title-minimal">
           {paper.title}
         </Link>
         <BookmarkButton paperId={paper.id} paperTitle={paper.title} />
       </div>
 
-      <div className="paper-meta">
-        <div className="paper-authors">
-          {paper.authors.slice(0, 4).map((author, index) => (
-            <div key={index} className="author-item">
-              <Image
-                src={author.email ? getGravatarUrl(author.email, 20) : getFallbackAvatarUrl(author.name, 20)}
-                alt={author.name}
-                width={20}
-                height={20}
-                className="author-avatar"
-                unoptimized
-              />
-              <Link 
-                href={`/authors/${encodeURIComponent(author.name)}`}
-                className="author-name-link"
-              >
-                {author.name}
-              </Link>
-            </div>
+      <div className="paper-meta-minimal">
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {paper.authors.slice(0, 2).map((author, index) => (
+            <Link 
+              key={index}
+              href={`/authors/${encodeURIComponent(author.name)}`}
+              style={{ color: '#888', textDecoration: 'none' }}
+            >
+              {author.name}{index < Math.min(paper.authors.length, 2) - 1 ? ',' : ''}
+            </Link>
           ))}
-          {hasMore && (
-            <span className="more-authors">+{paper.authors.length - 4} more</span>
+          {paper.authors.length > 2 && (
+            <span style={{ color: '#444' }}>et al.</span>
           )}
         </div>
-        <span style={{ color: 'var(--text-tertiary)' }}>·</span>
-        <span className="paper-date">{formattedDate}</span>
+        <span style={{ color: '#333' }}>·</span>
+        <span style={{ color: '#666' }}>{formattedDate}</span>
       </div>
 
-      <p className="paper-abstract">{paper.abstract}</p>
+      <p className="paper-abstract-minimal">{paper.abstract}</p>
 
-      <div className="paper-footer">
-        <div className="paper-categories">
-          {paper.categories.slice(0, 3).map((cat) => (
-            <span key={cat} className="badge badge-category">{cat}</span>
+      <div style={{ marginTop: 'auto', paddingTop: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {paper.categories.slice(0, 2).map((cat) => (
+            <span key={cat} style={{ fontSize: '11px', color: '#666', border: '1px solid #222', padding: '2px 8px', borderRadius: '4px' }}>{cat}</span>
           ))}
-          {paper.categories.length > 3 && (
-            <span className="badge badge-category">+{paper.categories.length - 3}</span>
-          )}
         </div>
-        <div className="paper-actions">
+        
+        <div style={{ display: 'flex', gap: '12px' }}>
           <a
             href={paper.pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-secondary btn-sm"
+            style={{ color: '#fff', fontSize: '13px', textDecoration: 'none', borderBottom: '1px solid #333' }}
             onClick={(e) => e.stopPropagation()}
           >
-            📄 PDF
+            PDF
           </a>
           <Link
             href={`/papers/${encodeURIComponent(paper.id)}`}
-            className="btn btn-ghost btn-sm"
+            style={{ color: '#fff', fontSize: '13px', textDecoration: 'none', fontWeight: '500' }}
           >
-            View →
+            Open ↗
           </Link>
         </div>
       </div>

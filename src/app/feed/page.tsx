@@ -59,109 +59,95 @@ export default function FeedPage() {
   const displayedCategories = showAllTopics ? ALL_CATEGORIES : ALL_CATEGORIES.slice(0, 12);
 
   return (
-    <div className="feed-page" id="feed-page">
-      <div className="section-header" style={{ marginBottom: 'var(--space-2xl)' }}>
-        <h1 className="section-title">Your Feed</h1>
-        <p className="section-subtitle">Latest papers from your subscribed topics</p>
+    <div className="page-minimal" id="feed-page">
+      <div className="page-header-minimal">
+        <h1 className="section-title-minimal">Research Feed</h1>
+        <p className="section-subtitle-minimal">Your personalized streams from subscribed fields</p>
       </div>
 
-      <div className="feed-layout">
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '60px' }}>
         {/* Main Feed */}
         <div>
-          {loading && (
-            <div className="loading-container">
+          {loading ? (
+            <div className="loading-container" style={{ padding: '100px 0' }}>
               <div className="loading-spinner" />
-              <span className="loading-text">Loading your feed...</span>
+              <span className="loading-text">Collecting insights...</span>
             </div>
-          )}
-
-          {!loading && papers.length > 0 && (
+          ) : papers.length > 0 ? (
             <div className="papers-grid" id="feed-papers">
               {papers.map((paper) => (
                 <PaperCard key={paper.id} paper={paper} />
               ))}
             </div>
-          )}
-
-          {!loading && papers.length === 0 && subscribedTopics.length > 0 && (
+          ) : subscribedTopics.length > 0 ? (
             <div className="empty-state">
               <div className="empty-state-icon">📡</div>
-              <div className="empty-state-title">No papers in your feed</div>
-              <div className="empty-state-text">Papers from your subscribed topics will appear here</div>
+              <div className="empty-state-title">No new insights</div>
+              <div className="empty-state-text">Your selected topics are quiet for now.</div>
             </div>
-          )}
-
-          {subscribedTopics.length === 0 && (
+          ) : (
             <div className="empty-state">
               <div className="empty-state-icon">🎯</div>
-              <div className="empty-state-title">Subscribe to topics</div>
-              <div className="empty-state-text">Select topics from the sidebar to build your personalized research feed</div>
+              <div className="empty-state-title">Build Your Feed</div>
+              <div className="empty-state-text">Select topics from the sidebar to curate your research stream.</div>
             </div>
           )}
         </div>
 
         {/* Sidebar */}
-        <div className="feed-sidebar">
-          <div className="sidebar-card" id="subscriptions-sidebar">
-            <div className="sidebar-card-title">
-              📡 Your Subscriptions
-            </div>
-            <div className="topic-list">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+          <div>
+            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+              Subscribed
+            </h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
               {subscribedTopics.map((code) => (
-                <div key={code} className="topic-item">
-                  <span className="topic-item-code">{code}</span>
-                  <button
-                    className="btn btn-ghost btn-sm"
-                    onClick={() => toggleTopic(code)}
-                    style={{ color: 'var(--danger)', padding: '2px 8px', fontSize: '0.75rem' }}
-                  >
-                    ✕
-                  </button>
+                <div key={code} className="filter-chip-minimal active" onClick={() => toggleTopic(code)}>
+                  {code} <span style={{ marginLeft: '4px', opacity: 0.5 }}>✕</span>
                 </div>
               ))}
               {subscribedTopics.length === 0 && (
-                <div style={{ fontSize: '0.8125rem', color: 'var(--text-tertiary)', padding: 'var(--space-sm)' }}>
-                  No subscriptions yet
-                </div>
+                <div style={{ fontSize: '13px', color: '#444' }}>None</div>
               )}
             </div>
           </div>
 
-          <div className="sidebar-card" id="topics-browser">
-            <div className="sidebar-card-title">
-              🏷️ Browse Topics
-            </div>
-            <div className="topic-list">
+          <div>
+            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+              Discover Topics
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               {displayedCategories.map(([code, name]) => {
                 const isSubscribed = subscribedTopics.includes(code);
                 return (
                   <div
                     key={code}
-                    className="topic-item"
                     onClick={() => toggleTopic(code)}
-                    style={{ cursor: 'pointer' }}
+                    style={{ 
+                      padding: '8px 12px', 
+                      borderRadius: '8px', 
+                      cursor: 'pointer',
+                      background: isSubscribed ? '#111' : 'transparent',
+                      color: isSubscribed ? '#fff' : '#666',
+                      fontSize: '13px',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      transition: 'all 0.2s ease'
+                    }}
                   >
-                    <div>
-                      <span className="topic-item-code">{code}</span>
-                      <span className="topic-item-label" style={{ marginLeft: '8px' }}>{name}</span>
-                    </div>
-                    <span style={{
-                      color: isSubscribed ? 'var(--success)' : 'var(--text-tertiary)',
-                      fontSize: '0.875rem',
-                    }}>
-                      {isSubscribed ? '✓' : '+'}
-                    </span>
+                    <span>{name}</span>
+                    <span style={{ fontSize: '10px', color: isSubscribed ? '#444' : '#333' }}>{code}</span>
                   </div>
                 );
               })}
             </div>
             {!showAllTopics && ALL_CATEGORIES.length > 12 && (
               <button
-                className="btn btn-ghost btn-sm"
+                className="nav-link-minimal"
                 onClick={() => setShowAllTopics(true)}
-                style={{ width: '100%', marginTop: 'var(--space-sm)' }}
+                style={{ marginTop: '16px', display: 'block', padding: '12px', textAlign: 'center', width: '100%', border: '1px solid #1a1a1a', borderRadius: '8px' }}
               >
-                Show all {ALL_CATEGORIES.length} topics →
+                Expand all topics
               </button>
             )}
           </div>

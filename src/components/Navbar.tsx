@@ -6,44 +6,50 @@ import { usePathname } from 'next/navigation';
 export default function Navbar() {
   const pathname = usePathname();
 
-  const links = [
-    { href: '/', label: 'Home' },
-    { href: '/papers', label: 'Papers' },
-    { href: '/feed', label: 'Feed' },
-    { href: '/groups', label: 'Groups' },
-    { href: '/profile', label: 'Profile' },
-  ];
+  // Helper to generate dynamic breadcrumbs
+  const getBreadcrumbs = () => {
+    if (pathname === '/') return { parts: ['regex', 'home'], current: 'home' };
+    
+    // Split pathname: /papers/123 -> ['papers', '123']
+    const pathParts = pathname.split('/').filter(Boolean);
+    return {
+      parts: ['regex', ...pathParts],
+      current: pathParts[pathParts.length - 1] || 'regex'
+    };
+  };
+
+  const { parts, current } = getBreadcrumbs();
 
   return (
-    <nav className="navbar" id="main-navbar">
-      <div className="navbar-inner">
-        <Link href="/" className="navbar-brand">
-          <span className="navbar-brand-icon">🔬</span>
-          regex
-        </Link>
-
-        <ul className="navbar-links">
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={`navbar-link ${pathname === link.href ? 'active' : ''}`}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <div className="navbar-auth">
-          <Link href="/auth/signin" className="btn btn-ghost btn-sm">
-            Sign In
-          </Link>
-          <Link href="/auth/signup" className="btn btn-primary btn-sm">
-            Sign Up
-          </Link>
+    <header className="home-header" style={{ position: 'fixed', top: 0, left: 0, right: 0, background: pathname === '/' ? 'transparent' : 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
+      <Link href="/" className="logo-island">
+        <div className="logo-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
         </div>
+        Research GPT
+      </Link>
+      
+      <div className="breadcrumb-island">
+        {parts.map((part, i) => (
+          <span key={part + i} style={{ display: 'flex', alignItems: 'center' }}>
+            <span style={{ color: part === current && i === parts.length - 1 ? '#FFFFFF' : '#666666' }}>
+              {part}
+            </span>
+            {i < parts.length - 1 && (
+              <span style={{ color: '#666666', margin: '0 12px' }}>/</span>
+            )}
+          </span>
+        ))}
       </div>
-    </nav>
+      
+      <div className="navbar-auth" style={{ display: 'flex', gap: '20px' }}>
+        <Link href="/papers" className={`nav-link-minimal ${pathname.startsWith('/papers') ? 'active' : ''}`}>Papers</Link>
+        <Link href="/feed" className={`nav-link-minimal ${pathname === '/feed' ? 'active' : ''}`}>Feed</Link>
+        <Link href="/profile" className={`nav-link-minimal ${pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
+      </div>
+    </header>
   );
 }

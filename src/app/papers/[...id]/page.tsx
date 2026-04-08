@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Paper, ARXIV_CATEGORIES } from '@/lib/types';
 import BookmarkButton from '@/components/BookmarkButton';
 import CitationGraph from '@/components/CitationGraph';
+import PaperCard from '@/components/PaperCard';
 
 export default function PaperDetailPage() {
   const params = useParams();
@@ -87,139 +88,118 @@ export default function PaperDetailPage() {
   });
 
   return (
-    <div className="paper-detail" id="paper-detail">
+    <div className="page-minimal" id="paper-detail">
       {/* Back navigation */}
-      <Link href="/papers" className="btn btn-ghost btn-sm" style={{ marginBottom: 'var(--space-xl)' }}>
+      <Link href="/papers" className="nav-link-minimal" style={{ marginBottom: '32px', display: 'inline-block' }}>
         ← Back to papers
       </Link>
 
       {/* Title */}
-      <h1 className="paper-detail-title" id="paper-title">{paper.title}</h1>
+      <h1 className="section-title-minimal" style={{ fontSize: '42px', marginBottom: '32px' }}>{paper.title}</h1>
 
       {/* Authors */}
-      <div className="paper-detail-authors" id="paper-authors">
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '48px' }}>
         {paper.authors.map((author, i) => (
           <Link
             key={i}
             href={`/authors/${encodeURIComponent(author.name)}`}
-            className="author-tag"
+            className="filter-chip-minimal"
           >
-            👤 {author.name}
+            {author.name}
             {author.affiliation && (
-              <span style={{ color: 'var(--text-tertiary)', fontSize: '0.75rem' }}>
-                ({author.affiliation})
-              </span>
+              <span style={{ color: '#444', marginLeft: '6px' }}>— {author.affiliation}</span>
             )}
           </Link>
         ))}
       </div>
 
-      {/* Actions */}
-      <div className="paper-detail-actions" id="paper-actions">
-        <a
-          href={paper.pdfUrl.startsWith('http') ? paper.pdfUrl : `https://arxiv.org/pdf/${paper.id}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-primary"
-        >
-          📄 PDF
-        </a>
-        <a
-          href={paper.abstractUrl.startsWith('http') ? paper.abstractUrl : `https://arxiv.org/abs/${paper.id}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-secondary"
-        >
-          🔗 arXiv Page
-        </a>
-        <BookmarkButton paperId={paper.id} paperTitle={paper.title} />
-      </div>
-
-      {/* Metadata */}
-      <div className="paper-detail-meta" id="paper-meta">
-        <div className="meta-item">
-          <div className="meta-label">Published</div>
-          <div className="meta-value">{publishedDate}</div>
-        </div>
-        <div className="meta-item">
-          <div className="meta-label">Last Updated</div>
-          <div className="meta-value">{updatedDate}</div>
-        </div>
-        <div className="meta-item">
-          <div className="meta-label">arXiv ID</div>
-          <div className="meta-value" style={{ fontFamily: 'var(--font-mono)' }}>{paper.id}</div>
-        </div>
-        {paper.doi && (
-          <div className="meta-item">
-            <div className="meta-label">DOI</div>
-            <div className="meta-value" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8125rem' }}>{paper.doi}</div>
+      {/* Metadata & Actions grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '60px', marginBottom: '60px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+          <div>
+            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+              Abstract
+            </h3>
+            <div style={{ fontSize: '16px', lineHeight: '1.7', color: '#888' }}>
+              {paper.abstract}
+            </div>
           </div>
-        )}
-      </div>
+          
+          {paper.comment && (
+            <div>
+              <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+                Comment
+              </h3>
+              <div style={{ fontSize: '14px', fontStyle: 'italic', color: '#666' }}>
+                {paper.comment}
+              </div>
+            </div>
+          )}
+        </div>
 
-      {/* Categories */}
-      <div style={{ marginBottom: 'var(--space-2xl)' }}>
-        <h3 style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-sm)' }}>
-          Categories
-        </h3>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-sm)' }}>
-          {paper.categories.map((cat) => (
-            <Link
-              key={cat}
-              href={`/papers?category=${cat}`}
-              className="badge badge-category"
-              style={{ textDecoration: 'none', padding: '4px 12px', fontSize: '0.8125rem' }}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+          <div>
+            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+              Details
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div>
+                <div style={{ fontSize: '11px', color: '#444' }}>Published</div>
+                <div style={{ fontSize: '14px', color: '#fff' }}>{publishedDate}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: '11px', color: '#444' }}>arXiv ID</div>
+                <div style={{ fontSize: '14px', color: '#fff', fontFamily: 'var(--font-mono)' }}>{paper.id}</div>
+              </div>
+              {paper.doi && (
+                <div>
+                  <div style={{ fontSize: '11px', color: '#444' }}>DOI</div>
+                  <div style={{ fontSize: '14px', color: '#fff', fontFamily: 'var(--font-mono)' }}>{paper.doi}</div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+              Categories
+            </h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {paper.categories.map((cat) => (
+                <span key={cat} style={{ fontSize: '11px', color: '#666', border: '1px solid #222', padding: '2px 8px', borderRadius: '4px' }}>{cat}</span>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
+            <a
+              href={paper.pdfUrl.startsWith('http') ? paper.pdfUrl : `https://arxiv.org/pdf/${paper.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="filter-chip-minimal"
+              style={{ textAlign: 'center', background: '#fff', color: '#000' }}
             >
-              {cat} {ARXIV_CATEGORIES[cat] ? `— ${ARXIV_CATEGORIES[cat]}` : ''}
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* Citation Graph */}
-      <CitationGraph paper={paper} />
-
-      {/* Abstract */}
-      <div style={{ marginBottom: 'var(--space-2xl)' }}>
-        <h3 style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-sm)' }}>
-          Abstract
-        </h3>
-        <div className="paper-detail-abstract" id="paper-abstract">
-          {paper.abstract}
-        </div>
-      </div>
-
-      {/* Comment */}
-      {paper.comment && (
-        <div style={{ marginBottom: 'var(--space-2xl)' }}>
-          <h3 style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-sm)' }}>
-            Comments
-          </h3>
-          <div className="paper-detail-abstract" style={{ fontStyle: 'italic' }}>
-            {paper.comment}
+              Download PDF
+            </a>
+            <BookmarkButton paperId={paper.id} paperTitle={paper.title} />
           </div>
         </div>
-      )}
+      </div>
+
+      {/* Citation Graph Section */}
+      <div style={{ marginBottom: '80px', border: '1px solid #1a1a1a', borderRadius: '16px', overflow: 'hidden' }}>
+        <CitationGraph paper={paper} />
+      </div>
 
       {/* Related Papers */}
       {relatedPapers.length > 0 && (
-        <div id="related-papers">
-          <h3 className="section-title" style={{ fontSize: '1.25rem', marginBottom: 'var(--space-lg)' }}>
-            Related Papers
+        <div id="related-papers" style={{ borderTop: '1px solid #1a1a1a', paddingTop: '60px' }}>
+          <h3 className="section-title-minimal" style={{ fontSize: '20px', marginBottom: '32px' }}>
+            Related Discoveries
           </h3>
           <div className="papers-grid">
             {relatedPapers.map((rp) => (
-              <Link
-                key={rp.id}
-                href={`/papers/${encodeURIComponent(rp.id)}`}
-                className="paper-card"
-                style={{ textDecoration: 'none' }}
-              >
-                <div className="paper-title" style={{ marginBottom: 'var(--space-sm)' }}>{rp.title}</div>
-                <div className="paper-authors" style={{ fontSize: '0.8125rem' }}>
-                  {rp.authors.slice(0, 3).map(a => a.name).join(', ')}
-                </div>
-              </Link>
+              <PaperCard key={rp.id} paper={rp} />
             ))}
           </div>
         </div>
