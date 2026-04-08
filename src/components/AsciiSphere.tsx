@@ -46,47 +46,7 @@ const AsciiSphere = () => {
         ))}
       </div>
       
-      <style jsx>{`
-        .ascii-sphere-container {
-          position: fixed;
-          right: -10%;
-          top: 50%;
-          transform: translateY(-50%);
-          z-index: 0;
-          pointer-events: none;
-          opacity: 0.6;
-          user-select: none;
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 14px;
-          line-height: 1.2;
-          color: #ffffff;
-          white-space: pre;
-          animation: float 20s infinite ease-in-out;
-        }
 
-        .ascii-sphere {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .ascii-line {
-          letter-spacing: 0.5em;
-          text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(-50%) translateX(0) scale(1); }
-          50% { transform: translateY(-52%) translateX(-20px) scale(1.05); }
-        }
-
-        @media (max-width: 1024px) {
-          .ascii-sphere-container {
-            right: -20%;
-            font-size: 10px;
-          }
-        }
-      `}</style>
     </div>
   );
 };

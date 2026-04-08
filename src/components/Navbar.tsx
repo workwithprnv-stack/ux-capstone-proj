@@ -21,7 +21,7 @@ export default function Navbar() {
   const { parts, current } = getBreadcrumbs();
 
   return (
-    <header className="home-header" style={{ position: 'fixed', top: 0, left: 0, right: 0, background: pathname === '/' ? 'transparent' : 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
+    <header className={`home-header ${pathname === '/' ? 'is-home' : ''}`}>
       <Link href="/" className="logo-island">
         <div className="logo-icon">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
