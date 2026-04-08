@@ -1638,7 +1638,7 @@ textarea.form-input {
 }
 
 .home-header {
-  padding: 40px;
+  padding: 12px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1751,7 +1751,7 @@ textarea.form-input {
 }
 
 .home-footer-minimal {
-  padding: 40px;
+  padding: 12px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1931,6 +1931,37 @@ textarea.form-input {
 
 .btn-premium-minimal.dark:hover {
   background: #111111;
+}
+
+.tab-container-minimal {
+  display: inline-flex;
+  gap: 4px;
+  background: #0a0a0a;
+  padding: 4px;
+  border-radius: 12px;
+  border: 1px solid #1a1a1a;
+}
+
+.tab-btn-minimal {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-btn-minimal:hover {
+  color: #999;
+}
+
+.tab-btn-minimal.active {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
 .footer {

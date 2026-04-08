@@ -107,50 +107,28 @@ export default function ProfilePage() {
             </div>
           )}
 
-          {/* Tabs Navigation */}
-          <div style={{ display: 'flex', gap: '32px', borderBottom: '1px solid #1a1a1a', marginBottom: '40px' }}>
-            <button
-              onClick={() => setActiveTab('bookmarks')}
-              style={{ 
-                padding: '12px 0', 
-                fontSize: '14px', 
-                color: activeTab === 'bookmarks' ? '#fff' : '#444', 
-                borderBottom: `2px solid ${activeTab === 'bookmarks' ? '#fff' : 'transparent'}`,
-                background: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.2s'
-              }}
-            >
-              Bookmarks
-            </button>
-            <button
-              onClick={() => setActiveTab('subscriptions')}
-              style={{ 
-                padding: '12px 0', 
-                fontSize: '14px', 
-                color: activeTab === 'subscriptions' ? '#fff' : '#444', 
-                borderBottom: `2px solid ${activeTab === 'subscriptions' ? '#fff' : 'transparent'}`,
-                background: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.2s'
-              }}
-            >
-              Subscriptions
-            </button>
-            <button
-              onClick={() => setActiveTab('groups')}
-              style={{ 
-                padding: '12px 0', 
-                fontSize: '14px', 
-                color: activeTab === 'groups' ? '#fff' : '#444', 
-                borderBottom: `2px solid ${activeTab === 'groups' ? '#fff' : 'transparent'}`,
-                background: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.2s'
-              }}
-            >
-              Collaboration
-            </button>
+          {/* Tabs Navigation Segmented Island */}
+          <div style={{ marginBottom: '48px' }}>
+            <div className="tab-container-minimal">
+              <button
+                onClick={() => setActiveTab('bookmarks')}
+                className={`tab-btn-minimal ${activeTab === 'bookmarks' ? 'active' : ''}`}
+              >
+                Bookmarks
+              </button>
+              <button
+                onClick={() => setActiveTab('subscriptions')}
+                className={`tab-btn-minimal ${activeTab === 'subscriptions' ? 'active' : ''}`}
+              >
+                Subscriptions
+              </button>
+              <button
+                onClick={() => setActiveTab('groups')}
+                className={`tab-btn-minimal ${activeTab === 'groups' ? 'active' : ''}`}
+              >
+                Collaboration
+              </button>
+            </div>
           </div>
 
           {/* Tab Content */}

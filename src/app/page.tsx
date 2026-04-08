@@ -20,7 +20,7 @@ export default function HomePage() {
     <div className="home-minimal" id="home-page">
       {/* Background/Visual Decorations */}
       <AsciiSphere />
-      
+
       {/* Main Content Area */}
       <main className="home-main">
         <form onSubmit={handleSubmit} className="search-section">
@@ -31,10 +31,10 @@ export default function HomePage() {
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </span>
-            <input 
-              type="text" 
-              className="search-input-modern" 
-              placeholder="Search" 
+            <input
+              type="text"
+              className="search-input-modern"
+              placeholder="Search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               autoFocus
@@ -47,9 +47,9 @@ export default function HomePage() {
       {/* Footer Area */}
       <footer className="home-footer-minimal">
         <div className="copyright">
-          © 2026 Nano
+          © 2026 Regex
         </div>
-        
+
         <nav className="footer-nav">
           <Link href="/about">About</Link>
           <Link href="/support">Support</Link>
