@@ -8,13 +8,13 @@ export default function Navbar() {
 
   // Helper to generate dynamic breadcrumbs
   const getBreadcrumbs = () => {
-    if (pathname === '/') return { parts: ['regex', 'home'], current: 'home' };
+    if (pathname === '/') return { parts: ['cronos', 'home'], current: 'home' };
     
     // Split pathname: /papers/123 -> ['papers', '123']
     const pathParts = pathname.split('/').filter(Boolean);
     return {
-      parts: ['regex', ...pathParts],
-      current: pathParts[pathParts.length - 1] || 'regex'
+      parts: ['cronos', ...pathParts],
+      current: pathParts[pathParts.length - 1] || 'cronos'
     };
   };
 
@@ -29,7 +29,7 @@ export default function Navbar() {
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
           </svg>
         </div>
-        Research GPT
+        CRONOS
       </Link>
       
       <div className="breadcrumb-island">

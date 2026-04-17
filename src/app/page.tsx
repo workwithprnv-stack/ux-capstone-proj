@@ -57,7 +57,7 @@ export default function HomePage() {
       {/* Footer Area */}
       <footer className="home-footer-minimal">
         <div className="copyright">
-          © 2026 Regex
+          © 2026 CRONOS
         </div>
 
         <nav className="footer-nav">

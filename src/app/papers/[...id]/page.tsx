@@ -107,7 +107,7 @@ export default function PaperDetailPage() {
           >
             {author.name}
             {author.affiliation && (
-              <span style={{ color: '#444', marginLeft: '6px' }}>— {author.affiliation}</span>
+              <span style={{ color: 'var(--text-tertiary)', marginLeft: '6px' }}>— {author.affiliation}</span>
             )}
           </Link>
         ))}
@@ -117,20 +117,20 @@ export default function PaperDetailPage() {
       <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '60px', marginBottom: '60px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
           <div>
-            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
               Abstract
             </h3>
-            <div style={{ fontSize: '16px', lineHeight: '1.7', color: '#888' }}>
+            <div style={{ fontSize: '16px', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
               {paper.abstract}
             </div>
           </div>
           
           {paper.comment && (
             <div>
-              <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
                 Comment
               </h3>
-              <div style={{ fontSize: '14px', fontStyle: 'italic', color: '#666' }}>
+              <div style={{ fontSize: '14px', fontStyle: 'italic', color: 'var(--text-tertiary)' }}>
                 {paper.comment}
               </div>
             </div>
@@ -139,34 +139,34 @@ export default function PaperDetailPage() {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
           <div>
-            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
               Details
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <div style={{ fontSize: '11px', color: '#444' }}>Published</div>
-                <div style={{ fontSize: '14px', color: '#fff' }}>{publishedDate}</div>
+                <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>Published</div>
+                <div style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{publishedDate}</div>
               </div>
               <div>
-                <div style={{ fontSize: '11px', color: '#444' }}>arXiv ID</div>
-                <div style={{ fontSize: '14px', color: '#fff', fontFamily: 'var(--font-mono)' }}>{paper.id}</div>
+                <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>arXiv ID</div>
+                <div style={{ fontSize: '14px', color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{paper.id}</div>
               </div>
               {paper.doi && (
                 <div>
-                  <div style={{ fontSize: '11px', color: '#444' }}>DOI</div>
-                  <div style={{ fontSize: '14px', color: '#fff', fontFamily: 'var(--font-mono)' }}>{paper.doi}</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>DOI</div>
+                  <div style={{ fontSize: '14px', color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{paper.doi}</div>
                 </div>
               )}
             </div>
           </div>
 
           <div>
-            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
               Categories
             </h3>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
               {paper.categories.map((cat) => (
-                <span key={cat} style={{ fontSize: '11px', color: '#666', border: '1px solid #222', padding: '2px 8px', borderRadius: '4px' }}>
+                <span key={cat} style={{ fontSize: '11px', color: 'var(--text-tertiary)', border: '1px solid var(--border-subtle)', padding: '2px 8px', borderRadius: '4px' }}>
                   {formatCategory(cat)}
                 </span>
               ))}
@@ -179,7 +179,7 @@ export default function PaperDetailPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="filter-chip-minimal"
-              style={{ textAlign: 'center', background: '#fff', color: '#000' }}
+              style={{ textAlign: 'center', background: 'var(--gradient-primary)', color: '#ffffff', boxShadow: '0 4px 15px rgba(193, 116, 163, 0.2)' }}
             >
               Download PDF
             </a>
@@ -189,13 +189,13 @@ export default function PaperDetailPage() {
       </div>
 
       {/* Citation Graph Section */}
-      <div style={{ marginBottom: '80px', border: '1px solid #1a1a1a', borderRadius: '16px', overflow: 'hidden' }}>
+      <div style={{ marginBottom: '80px', border: '1px solid var(--border-subtle)', borderRadius: '16px', overflow: 'hidden' }}>
         <CitationGraph paper={paper} />
       </div>
 
       {/* Related Papers */}
       {relatedPapers.length > 0 && (
-        <div id="related-papers" style={{ borderTop: '1px solid #1a1a1a', paddingTop: '60px' }}>
+        <div id="related-papers" style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '60px' }}>
           <h3 className="section-title-minimal" style={{ fontSize: '20px', marginBottom: '32px' }}>
             Related Discoveries
           </h3>

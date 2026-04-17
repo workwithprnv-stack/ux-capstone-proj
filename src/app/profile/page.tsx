@@ -56,8 +56,8 @@ export default function ProfilePage() {
               <div style={{ 
                 width: '64px', 
                 height: '64px', 
-                background: '#fff', 
-                color: '#000', 
+                background: 'var(--text-primary)', 
+                color: 'var(--bg-primary)', 
                 borderRadius: '50%', 
                 display: 'flex', 
                 alignItems: 'center', 
@@ -69,7 +69,7 @@ export default function ProfilePage() {
               </div>
               <div>
                 <h1 className="section-title-minimal" style={{ fontSize: '32px', marginBottom: '4px' }}>{profile.full_name}</h1>
-                <div style={{ color: '#666', fontSize: '14px' }}>@{profile.username}</div>
+                <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>@{profile.username}</div>
               </div>
               <button
                 className="btn-premium-minimal secondary"
@@ -84,21 +84,21 @@ export default function ProfilePage() {
 
           {/* Edit Form Island */}
           {isEditing && (
-            <div style={{ background: '#0a0a0a', border: '1px solid #1a1a1a', borderRadius: '16px', padding: '32px', marginBottom: '48px' }}>
+            <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-medium)', borderRadius: '16px', padding: '32px', marginBottom: '48px' }}>
               <h3 className="section-title-minimal" style={{ fontSize: '18px', marginBottom: '24px' }}>Update Identity</h3>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
                 <div className="form-group">
-                  <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Name</label>
-                  <input className="search-input-modern" style={{ height: '40px', background: '#000', border: '1px solid #222' }} defaultValue={profile.full_name} />
+                  <label style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Name</label>
+                  <input className="search-input-modern" style={{ height: '40px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)' }} defaultValue={profile.full_name} />
                 </div>
                 <div className="form-group">
-                  <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Handle</label>
-                  <input className="search-input-modern" style={{ height: '40px', background: '#000', border: '1px solid #222' }} defaultValue={profile.username} />
+                  <label style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Handle</label>
+                  <input className="search-input-modern" style={{ height: '40px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)' }} defaultValue={profile.username} />
                 </div>
               </div>
               <div className="form-group" style={{ marginBottom: '24px' }}>
-                <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Biography</label>
-                <textarea className="search-input-modern" style={{ height: '80px', background: '#000', border: '1px solid #222', paddingTop: '10px' }} defaultValue={profile.bio} />
+                <label style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Biography</label>
+                <textarea className="search-input-modern" style={{ height: '80px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)', paddingTop: '10px' }} defaultValue={profile.bio} />
               </div>
               <div style={{ display: 'flex', gap: '12px', marginTop: '32px' }}>
                 <button className="btn-premium-minimal" onClick={() => setIsEditing(false)}>Save Identity</button>
@@ -139,12 +139,12 @@ export default function ProfilePage() {
                   <div key={bm.arxiv_id} className="paper-card-minimal">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <Link href={`/papers/${bm.arxiv_id}`} className="paper-title-minimal" style={{ fontSize: '15px' }}>{bm.title}</Link>
-                      <button style={{ background: 'none', border: 'none', color: '#fff', fontSize: '18px', cursor: 'pointer' }}>★</button>
+                      <button style={{ background: 'none', border: 'none', color: 'var(--accent-primary)', fontSize: '18px', cursor: 'pointer' }}>★</button>
                     </div>
                     <div className="paper-meta-minimal">
                       <span>{bm.authors}</span>
-                      <span style={{ color: '#333' }}>·</span>
-                      <span style={{ color: '#666' }}>Saved {new Date(bm.saved_at).toLocaleDateString()}</span>
+                      <span style={{ color: 'var(--border-medium)' }}>·</span>
+                      <span style={{ color: 'var(--text-tertiary)' }}>Saved {new Date(bm.saved_at).toLocaleDateString()}</span>
                     </div>
                   </div>
                 ))}
@@ -156,15 +156,15 @@ export default function ProfilePage() {
                 {profile.research_interests.map((cat) => (
                   <div key={cat} className="paper-card-minimal" style={{ padding: '20px', alignItems: 'center', textAlign: 'center' }}>
                     <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>{formatCategory(cat)}</div>
-                    <div style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase' }}>Subscribed</div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>Subscribed</div>
                   </div>
                 ))}
               </div>
             )}
 
             {activeTab === 'groups' && (
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '300px', border: '1px dashed #222', borderRadius: '16px' }}>
-                <div style={{ fontSize: '14px', color: '#666', marginBottom: '16px' }}>No research clusters joined</div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '300px', border: '1px dashed var(--border-subtle)', borderRadius: '16px' }}>
+                <div style={{ fontSize: '14px', color: 'var(--text-tertiary)', marginBottom: '16px' }}>No research clusters joined</div>
                 <Link href="/groups" className="filter-chip-minimal active">Explore Clusters</Link>
               </div>
             )}
@@ -174,7 +174,7 @@ export default function ProfilePage() {
         {/* Sidebar */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
           <div>
-            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
               Research Focus
             </h3>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -191,7 +191,7 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          <div style={{ padding: '24px', background: '#ffffff', borderRadius: '16px', color: '#000' }}>
+          <div style={{ padding: '24px', background: 'var(--gradient-primary)', borderRadius: '16px', color: '#ffffff', boxShadow: '0 8px 30px rgba(193, 116, 163, 0.2)' }}>
             <h4 style={{ fontSize: '13px', fontWeight: '700', marginBottom: '12px' }}>Pro Upgrade</h4>
             <p style={{ fontSize: '12px', lineHeight: '1.5', marginBottom: '16px', opacity: 0.8 }}>Access deeper citation graphs and collaboration tools.</p>
             <button className="btn-premium-minimal dark" style={{ width: '100%', marginTop: '8px' }}>

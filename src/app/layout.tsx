@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "regex",
+  title: "CRONOS",
   description: "A modern research collaboration platform. Search arXiv papers, bookmark discoveries, follow topics, join research groups, and collaborate with researchers worldwide.",
   keywords: ["arxiv", "research", "papers", "collaboration", "science", "machine learning", "AI"],
 };

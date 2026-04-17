@@ -91,11 +91,11 @@ function PapersContent() {
 
       {/* Results Info */}
       {(query || activeCategory) && !loading && (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', fontSize: '14px', color: '#666' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', fontSize: '14px', color: 'var(--text-secondary)' }}>
           <span>{totalResults.toLocaleString()} results found</span>
           <select
             className="sort-select"
-            style={{ background: 'transparent', color: '#fff', border: '1px solid #333', borderRadius: '40px', padding: '4px 12px', outline: 'none' }}
+            style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)', borderRadius: '40px', padding: '4px 12px', outline: 'none' }}
             value={sortBy}
             onChange={(e) => { setSortBy(e.target.value); setPage(0); }}
             id="sort-select"
@@ -137,7 +137,7 @@ function PapersContent() {
           >
             ← Previous
           </button>
-          <span style={{ color: '#666', fontSize: '14px', alignSelf: 'center' }}>
+          <span style={{ color: 'var(--text-secondary)', fontSize: '14px', alignSelf: 'center' }}>
             Page {page + 1} of {Math.min(totalPages, 100)}
           </span>
           <button

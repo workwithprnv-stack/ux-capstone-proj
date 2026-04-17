@@ -117,12 +117,12 @@ export default function GroupsPage() {
             <p className="paper-abstract-minimal" style={{ marginBottom: '24px', WebkitLineClamp: '3' }}>{group.description}</p>
             
             <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ fontSize: '11px', color: '#444', textTransform: 'uppercase' }}>
+              <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>
                 {group.member_count} synchronizing
               </div>
               <div style={{ display: 'flex', gap: '12px' }}>
-                <button className="nav-link-minimal" style={{ fontSize: '12px', borderBottom: '1px solid #222' }}>Join</button>
-                <button className="nav-link-minimal" style={{ fontSize: '12px', color: '#fff' }}>Open ↗</button>
+                <button className="nav-link-minimal" style={{ fontSize: '12px', borderBottom: '1px solid var(--border-subtle)' }}>Join</button>
+                <button className="nav-link-minimal" style={{ fontSize: '12px', color: 'var(--text-primary)' }}>Open ↗</button>
               </div>
             </div>
           </div>
@@ -139,28 +139,28 @@ export default function GroupsPage() {
 
       {/* Modern Modal Island */}
       {showCreateModal && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowCreateModal(false)}>
-          <div style={{ width: '480px', background: '#0a0a0a', border: '1px solid #1a1a1a', borderRadius: '24px', padding: '40px' }} onClick={(e) => e.stopPropagation()} id="create-group-modal">
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(14, 14, 14, 0.8)', backdropFilter: 'blur(8px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowCreateModal(false)}>
+          <div style={{ width: '480px', background: 'var(--bg-card)', border: '1px solid var(--border-medium)', borderRadius: '24px', padding: '40px' }} onClick={(e) => e.stopPropagation()} id="create-group-modal">
             <h2 className="section-title-minimal" style={{ fontSize: '20px', marginBottom: '32px' }}>Initialize Cluster</h2>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
               <div className="form-group">
-                <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Cluster Name</label>
-                <input className="search-input-modern" style={{ height: '40px', background: '#000', border: '1px solid #222' }} placeholder="e.g. Neural Dynamics" />
+                <label style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Cluster Name</label>
+                <input className="search-input-modern" style={{ height: '40px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)' }} placeholder="e.g. Neural Dynamics" />
               </div>
 
               <div className="form-group">
-                <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Mission Statement</label>
+                <label style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Mission Statement</label>
                 <textarea 
                   className="search-input-modern" 
-                  style={{ height: '100px', background: '#000', border: '1px solid #222', paddingTop: '12px' }} 
+                  style={{ height: '100px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)', paddingTop: '12px' }} 
                   placeholder="Define the synchronization goals..." 
                 />
               </div>
 
               <div className="form-group">
-                <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Fields of Interest</label>
-                <input className="search-input-modern" style={{ height: '40px', background: '#000', border: '1px solid #222' }} placeholder="cs.AI, quant-ph..." />
+                <label style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Fields of Interest</label>
+                <input className="search-input-modern" style={{ height: '40px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)' }} placeholder="cs.AI, quant-ph..." />
               </div>
             </div>
 
