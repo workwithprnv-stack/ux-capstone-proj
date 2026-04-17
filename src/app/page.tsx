@@ -3,7 +3,9 @@
 import Link from 'next/link';
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import AsciiSphere from '@/components/AsciiSphere';
+import Image from 'next/image';
+import sphereImg from '../../image.png';
+
 
 export default function HomePage() {
   const [query, setQuery] = useState('');
@@ -19,7 +21,15 @@ export default function HomePage() {
   return (
     <div className="home-minimal" id="home-page">
       {/* Background/Visual Decorations */}
-      <AsciiSphere />
+      <div className="home-image-container">
+        <Image 
+          src={sphereImg} 
+          alt="Home Visual" 
+          className="home-image"
+          priority
+        />
+      </div>
+
 
       {/* Main Content Area */}
       <main className="home-main">

@@ -1638,32 +1638,24 @@ textarea.form-input {
 }
 
 /* Ascii Sphere Styles */
-.ascii-sphere-container {
+/* Home Visual Styles */
+.home-image-container {
   position: fixed;
   right: -5%;
   top: 50%;
   transform: translateY(-50%);
   z-index: 0;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.8;
   user-select: none;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.2;
-  color: #ffffff;
-  white-space: pre;
-  animation: float 20s infinite ease-in-out;
+  animation: none;
 }
 
-.ascii-sphere {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.ascii-line {
-  letter-spacing: 0.5em;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+.home-image {
+  width: auto;
+  height: 600px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.15));
 }
 
 @keyframes float {
@@ -1672,11 +1664,14 @@ textarea.form-input {
 }
 
 @media (max-width: 1024px) {
-  .ascii-sphere-container {
+  .home-image-container {
     right: -15%;
-    font-size: 10px;
+  }
+  .home-image {
+    height: 400px;
   }
 }
+
 
 .home-header {
   padding: 12px 40px;
