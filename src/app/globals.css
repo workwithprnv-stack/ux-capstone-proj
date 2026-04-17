@@ -1658,10 +1658,7 @@ textarea.form-input {
   filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.15));
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(-50%) translateX(0) scale(1); }
-  50% { transform: translateY(-52%) translateX(-20px) scale(1.05); }
-}
+
 
 @media (max-width: 1024px) {
   .home-image-container {
