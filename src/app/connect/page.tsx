@@ -365,7 +365,6 @@ export default function ConnectPage() {
           cursor: not-allowed;
         }
       `}</style>
-      `}</style>
     </div>
   );
 }
