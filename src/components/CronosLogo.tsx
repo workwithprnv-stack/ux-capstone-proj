@@ -11,8 +11,8 @@ const CronosLogo = ({ size = 32 }: { size?: number }) => {
     >
       <defs>
         <radialGradient id="planetGradient" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(35 35) rotate(45) scale(60)">
-          <stop offset="0%" stopColor="#C174A3" />
-          <stop offset="100%" stopColor="#2A1A4C" />
+          <stop offset="0%" stopColor="#DC69A8" />
+          <stop offset="100%" stopColor="#301852" />
         </radialGradient>
         <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur stdDeviation="2" result="blur" />
@@ -21,7 +21,7 @@ const CronosLogo = ({ size = 32 }: { size?: number }) => {
       </defs>
       
       {/* Glow effect for the planet */}
-      <circle cx="50" cy="50" r="32" fill="#C174A3" opacity="0.2" filter="url(#glow)" />
+      <circle cx="50" cy="50" r="32" fill="#DC69A8" opacity="0.2" filter="url(#glow)" />
       
       {/* The Purple Planet */}
       <circle cx="50" cy="50" r="30" fill="url(#planetGradient)" />

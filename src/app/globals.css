@@ -3,28 +3,28 @@
 :root {
   /* Color System - CRONOS Galaxy Theme */
   --bg-primary: #0E0E0E;
-  --bg-secondary: #2A1A4C; /* Deep Space Purple */
+  --bg-secondary: #301852;
   --bg-tertiary: #1A1A1A;
   --bg-card: rgba(56, 54, 56, 0.6);
-  --bg-card-hover: rgba(42, 26, 76, 0.8);
+  --bg-card-hover: rgba(48, 24, 82, 0.8);
   --bg-glass: rgba(255, 255, 255, 0.02);
-  --bg-glass-hover: rgba(193, 116, 163, 0.1);
+  --bg-glass-hover: rgba(220, 105, 168, 0.1);
 
   --text-primary: #F2F2F3;
   --text-secondary: #CFD4DE;
   --text-tertiary: #8A8A8A;
-  --text-accent: #C174A3;
+  --text-accent: #DC69A8;
 
-  --accent-primary: #C174A3; /* Nebula Pink */
-  --accent-secondary: #2A1A4C; /* Space Purple */
+  --accent-primary: #DC69A8;
+  --accent-secondary: #301852;
   --accent-tertiary: #4D3C77; 
-  --accent-glow: rgba(193, 116, 163, 0.2);
-  --accent-glow-strong: rgba(193, 116, 163, 0.4);
+  --accent-glow: rgba(220, 105, 168, 0.2);
+  --accent-glow-strong: rgba(220, 105, 168, 0.4);
 
-  --gradient-primary: linear-gradient(135deg, #2A1A4C 0%, #C174A3 100%);
-  --gradient-secondary: linear-gradient(135deg, #C174A3 0%, #818cf8 100%);
-  --gradient-hero: radial-gradient(circle at top right, #2A1A4C 0%, #0E0E0E 60%);
-  --gradient-card: linear-gradient(135deg, rgba(193, 116, 163, 0.1) 0%, rgba(42, 26, 76, 0.05) 100%);
+  --gradient-primary: linear-gradient(135deg, #301852 0%, #DC69A8 100%);
+  --gradient-secondary: linear-gradient(135deg, #DC69A8 0%, #818cf8 100%);
+  --gradient-hero: radial-gradient(circle at top right, #301852 0%, #0E0E0E 60%);
+  --gradient-card: linear-gradient(135deg, rgba(220, 105, 168, 0.1) 0%, rgba(48, 24, 82, 0.05) 100%);
 
   --border-subtle: rgba(207, 212, 222, 0.1);
   --border-medium: rgba(193, 116, 163, 0.2);
@@ -1905,9 +1905,24 @@ textarea.form-input {
 }
 
 .paper-card-minimal:hover {
-  border-color: #333333;
-  background: #111111;
-  transform: translateY(-2px);
+  border-color: #DC69A8;
+  background: linear-gradient(145deg, #301852 0%, #0a0a0a 100%);
+  position: relative;
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(220, 105, 168, 0.1);
+  z-index: 1;
+}
+
+.paper-card-minimal:hover::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, #301852, #DC69A8);
+  border-radius: 12px;
+  z-index: -1;
+  opacity: 0.8;
 }
 
 .paper-title-minimal {
@@ -1916,6 +1931,11 @@ textarea.form-input {
   line-height: 1.4;
   color: #ffffff;
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.paper-card-minimal:hover .paper-title-minimal {
+  color: #DC69A8;
 }
 
 .paper-meta-minimal {
