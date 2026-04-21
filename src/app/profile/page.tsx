@@ -155,7 +155,7 @@ export default function ProfilePage() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
                 {profile.research_interests.map((cat) => (
                   <div key={cat} className="paper-card-minimal" style={{ padding: '20px', alignItems: 'center', textAlign: 'center' }}>
-                    <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>{formatCategory(cat)}</div>
+                    <div style={{ fontSize: '16px', fontWeight: '700', marginBottom: '8px' }}>{formatCategory(cat, true)}</div>
                     <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>Subscribed</div>
                   </div>
                 ))}
@@ -185,7 +185,7 @@ export default function ProfilePage() {
                   className="filter-chip-minimal"
                   style={{ textDecoration: 'none' }}
                 >
-                  {formatCategory(interest)}
+                  {formatCategory(interest, true)}
                 </Link>
               ))}
             </div>

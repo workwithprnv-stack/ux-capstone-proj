@@ -70,11 +70,18 @@ export interface TopicSubscription {
 }
 
 /**
- * Strips the arXiv prefix from a category code for cleaner display.
- * e.g., 'cs.AI' -> 'AI', 'stat.ML' -> 'ML'
+ * Formats an arXiv category code for display.
+ * @param category The category code (e.g., 'cs.AI')
+ * @param full If true, returns the full descriptive name from ARXIV_CATEGORIES if available
+ * @returns The formatted name (e.g., 'AI' or 'Artificial Intelligence')
  */
-export function formatCategory(category: string): string {
+export function formatCategory(category: string, full: boolean = false): string {
   if (!category) return '';
+  
+  if (full && ARXIV_CATEGORIES[category]) {
+    return ARXIV_CATEGORIES[category];
+  }
+  
   const parts = category.split('.');
   return parts.length > 1 ? parts[1] : category;
 }

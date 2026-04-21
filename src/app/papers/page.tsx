@@ -60,7 +60,7 @@ function PapersContent() {
     <div className="page-minimal" id="papers-page">
       <div className="page-header-minimal">
         <h1 className="section-title-minimal">
-          {query ? `Results for "${query}"` : activeCategory ? `Papers in ${formatCategory(activeCategory)}` : 'Search Papers'}
+          {query ? `Results for "${query}"` : activeCategory ? `Papers in ${formatCategory(activeCategory, true)}` : 'Search Papers'}
         </h1>
         <p className="section-subtitle-minimal" style={{ marginBottom: '32px' }}>
           Search millions of arXiv papers across all research fields
@@ -84,7 +84,7 @@ function PapersContent() {
             className={`filter-chip-minimal ${activeCategory === cat ? 'active' : ''}`}
             onClick={() => { setActiveCategory(cat); setPage(0); }}
           >
-            {formatCategory(cat)}
+            {formatCategory(cat, true)}
           </button>
         ))}
       </div>

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import CronosLogo from './CronosLogo';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -22,14 +23,11 @@ export default function Navbar() {
 
   return (
     <header className={`home-header ${pathname === '/' ? 'is-home' : ''}`}>
-      <Link href="/" className="logo-island">
-        <div className="logo-icon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-          </svg>
+      <Link href="/" className="logo-island" style={{ gap: '16px' }}>
+        <div className="logo-icon" style={{ background: 'none', padding: 0 }}>
+          <CronosLogo size={42} />
         </div>
-        CRONOS
+        <span style={{ letterSpacing: '0.4em', fontWeight: 600, fontSize: '14px', marginLeft: '-4px' }}>CRONOS</span>
       </Link>
       
       <div className="breadcrumb-island">

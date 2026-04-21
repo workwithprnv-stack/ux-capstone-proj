@@ -103,7 +103,7 @@ export default function FeedPage() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
               {subscribedTopics.map((code) => (
                 <div key={code} className="filter-chip-minimal active" onClick={() => toggleTopic(code)}>
-                  {formatCategory(code)} <span style={{ marginLeft: '4px', opacity: 0.5 }}>✕</span>
+                  {formatCategory(code, true)} <span style={{ marginLeft: '4px', opacity: 0.5 }}>✕</span>
                 </div>
               ))}
               {subscribedTopics.length === 0 && (
@@ -136,7 +136,7 @@ export default function FeedPage() {
                     }}
                   >
                     <span>{name}</span>
-                    <span style={{ fontSize: '10px', color: isSubscribed ? '#444' : '#333' }}>{formatCategory(code)}</span>
+                    <span style={{ fontSize: '10px', color: isSubscribed ? '#444' : '#333' }}>{code}</span>
                   </div>
                 );
               })}
