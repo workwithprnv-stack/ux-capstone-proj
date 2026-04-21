@@ -11,7 +11,6 @@ interface BookmarkItem {
   saved_at: string;
 }
 
-// Demo data for UI showcase
 const DEMO_BOOKMARKS: BookmarkItem[] = [
   {
     arxiv_id: '2301.00001',
@@ -37,7 +36,6 @@ export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState<'bookmarks' | 'subscriptions' | 'groups'>('bookmarks');
   const [isEditing, setIsEditing] = useState(false);
 
-  // Demo profile data
   const profile = {
     username: 'researcher',
     full_name: 'Alex Researcher',
@@ -54,32 +52,33 @@ export default function ProfilePage() {
           <div className="page-header-minimal" style={{ marginBottom: '48px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '24px' }}>
               <div style={{ 
-                width: '64px', 
-                height: '64px', 
-                background: 'var(--text-primary)', 
-                color: 'var(--bg-primary)', 
+                width: '80px', 
+                height: '80px', 
+                background: 'var(--gradient-primary)', 
+                color: '#fff', 
                 borderRadius: '50%', 
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'center', 
-                fontSize: '24px', 
-                fontWeight: '700' 
+                fontSize: '32px', 
+                fontWeight: '700',
+                boxShadow: '0 0 30px rgba(220, 105, 168, 0.4)'
               }}>
                 {profile.full_name.charAt(0)}
               </div>
               <div>
-                <h1 className="section-title-minimal" style={{ fontSize: '32px', marginBottom: '4px' }}>{profile.full_name}</h1>
-                <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>@{profile.username}</div>
+                <h1 className="section-title-minimal" style={{ fontSize: '36px', marginBottom: '4px' }}>{profile.full_name}</h1>
+                <div style={{ color: 'var(--text-secondary)', fontSize: '14px', letterSpacing: '0.1em' }}>@{profile.username}</div>
               </div>
               <button
                 className="btn-premium-minimal secondary"
-                style={{ marginLeft: 'auto' }}
+                style={{ marginLeft: 'auto', border: '1px solid #DC69A8', color: '#DC69A8' }}
                 onClick={() => setIsEditing(!isEditing)}
               >
                 {isEditing ? 'Cancel' : 'Edit Profile'}
               </button>
             </div>
-            <p className="section-subtitle-minimal" style={{ maxWidth: '600px', lineHeight: '1.6' }}>{profile.bio}</p>
+            <p className="section-subtitle-minimal" style={{ maxWidth: '600px', lineHeight: '1.6', color: '#888' }}>{profile.bio}</p>
           </div>
 
           {/* Edit Form Island */}
@@ -88,26 +87,26 @@ export default function ProfilePage() {
               <h3 className="section-title-minimal" style={{ fontSize: '18px', marginBottom: '24px' }}>Update Identity</h3>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
                 <div className="form-group">
-                  <label style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Name</label>
-                  <input className="search-input-modern" style={{ height: '40px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)' }} defaultValue={profile.full_name} />
+                  <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Name</label>
+                  <input className="search-input-modern" style={{ height: '40px', background: 'var(--bg-primary)', border: '1px solid #333' }} defaultValue={profile.full_name} />
                 </div>
                 <div className="form-group">
-                  <label style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Handle</label>
-                  <input className="search-input-modern" style={{ height: '40px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)' }} defaultValue={profile.username} />
+                  <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Handle</label>
+                  <input className="search-input-modern" style={{ height: '40px', background: 'var(--bg-primary)', border: '1px solid #333' }} defaultValue={profile.username} />
                 </div>
               </div>
               <div className="form-group" style={{ marginBottom: '24px' }}>
-                <label style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Biography</label>
-                <textarea className="search-input-modern" style={{ height: '80px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)', paddingTop: '10px' }} defaultValue={profile.bio} />
+                <label style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>Biography</label>
+                <textarea className="search-input-modern" style={{ height: '80px', background: 'var(--bg-primary)', border: '1px solid #333', paddingTop: '10px' }} defaultValue={profile.bio} />
               </div>
               <div style={{ display: 'flex', gap: '12px', marginTop: '32px' }}>
-                <button className="btn-premium-minimal" onClick={() => setIsEditing(false)}>Save Identity</button>
+                <button className="btn-premium-minimal" style={{ background: 'var(--gradient-primary)' }} onClick={() => setIsEditing(false)}>Save Identity</button>
                 <button className="btn-premium-minimal secondary" onClick={() => setIsEditing(false)}>Discard</button>
               </div>
             </div>
           )}
 
-          {/* Tabs Navigation Segmented Island */}
+          {/* Tabs Navigation */}
           <div style={{ marginBottom: '48px' }}>
             <div className="tab-container-minimal">
               <button
@@ -139,12 +138,12 @@ export default function ProfilePage() {
                   <div key={bm.arxiv_id} className="paper-card-minimal">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <Link href={`/papers/${bm.arxiv_id}`} className="paper-title-minimal" style={{ fontSize: '15px' }}>{bm.title}</Link>
-                      <button style={{ background: 'none', border: 'none', color: 'var(--accent-primary)', fontSize: '18px', cursor: 'pointer' }}>★</button>
+                      <button style={{ background: 'none', border: 'none', color: '#DC69A8', fontSize: '18px', cursor: 'pointer' }}>★</button>
                     </div>
                     <div className="paper-meta-minimal">
                       <span>{bm.authors}</span>
-                      <span style={{ color: 'var(--border-medium)' }}>·</span>
-                      <span style={{ color: 'var(--text-tertiary)' }}>Saved {new Date(bm.saved_at).toLocaleDateString()}</span>
+                      <span style={{ color: '#444' }}>·</span>
+                      <span style={{ color: '#666' }}>Saved {new Date(bm.saved_at).toLocaleDateString()}</span>
                     </div>
                   </div>
                 ))}
@@ -154,18 +153,18 @@ export default function ProfilePage() {
             {activeTab === 'subscriptions' && (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
                 {profile.research_interests.map((cat) => (
-                  <div key={cat} className="paper-card-minimal" style={{ padding: '20px', alignItems: 'center', textAlign: 'center' }}>
+                  <div key={cat} className="paper-card-minimal" style={{ padding: '24px', alignItems: 'center', textAlign: 'center' }}>
                     <div style={{ fontSize: '16px', fontWeight: '700', marginBottom: '8px' }}>{formatCategory(cat, true)}</div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>Subscribed</div>
+                    <div style={{ fontSize: '10px', color: '#DC69A8', textTransform: 'uppercase' }}>Subscribed</div>
                   </div>
                 ))}
               </div>
             )}
 
             {activeTab === 'groups' && (
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '300px', border: '1px dashed var(--border-subtle)', borderRadius: '16px' }}>
-                <div style={{ fontSize: '14px', color: 'var(--text-tertiary)', marginBottom: '16px' }}>No research clusters joined</div>
-                <Link href="/groups" className="filter-chip-minimal active">Explore Clusters</Link>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '300px', border: '1px dashed #222', borderRadius: '16px' }}>
+                <div style={{ fontSize: '14px', color: '#666', marginBottom: '16px' }}>No research clusters joined</div>
+                <Link href="/groups" className="filter-chip-minimal active" style={{ background: 'var(--gradient-primary)' }}>Explore Clusters</Link>
               </div>
             )}
           </div>
@@ -174,7 +173,7 @@ export default function ProfilePage() {
         {/* Sidebar */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
           <div>
-            <h3 style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
               Research Focus
             </h3>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -183,7 +182,7 @@ export default function ProfilePage() {
                   key={interest}
                   href={`/papers?category=${interest}`}
                   className="filter-chip-minimal"
-                  style={{ textDecoration: 'none' }}
+                  style={{ textDecoration: 'none', borderColor: '#333' }}
                 >
                   {formatCategory(interest, true)}
                 </Link>
@@ -191,12 +190,12 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          <div style={{ padding: '24px', background: 'var(--gradient-primary)', borderRadius: '16px', color: '#ffffff', boxShadow: '0 8px 30px rgba(193, 116, 163, 0.2)' }}>
-            <h4 style={{ fontSize: '13px', fontWeight: '700', marginBottom: '12px' }}>Pro Upgrade</h4>
-            <p style={{ fontSize: '12px', lineHeight: '1.5', marginBottom: '16px', opacity: 0.8 }}>Access deeper citation graphs and collaboration tools.</p>
-            <button className="btn-premium-minimal dark" style={{ width: '100%', marginTop: '8px' }}>
-              Upgrade Now
-            </button>
+          <div style={{ padding: '24px', background: 'var(--bg-card)', border: '1px solid var(--border-medium)', borderRadius: '16px', color: '#ffffff' }}>
+            <h4 style={{ fontSize: '13px', fontWeight: '700', marginBottom: '12px', color: '#DC69A8' }}>Network Synchronization</h4>
+            <p style={{ fontSize: '12px', lineHeight: '1.5', marginBottom: '16px', color: '#888' }}>Connect with peers orbiting similar research interests.</p>
+            <Link href="/connect" className="btn-premium-minimal" style={{ width: '100%', marginTop: '8px', display: 'block', textAlign: 'center', background: 'var(--gradient-primary)' }}>
+              Open Connect
+            </Link>
           </div>
         </div>
       </div>

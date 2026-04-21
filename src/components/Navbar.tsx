@@ -46,6 +46,7 @@ export default function Navbar() {
       <div className="navbar-auth" style={{ display: 'flex', gap: '20px' }}>
         <Link href="/papers" className={`nav-link-minimal ${pathname.startsWith('/papers') ? 'active' : ''}`}>Papers</Link>
         <Link href="/feed" className={`nav-link-minimal ${pathname === '/feed' ? 'active' : ''}`}>Feed</Link>
+        <Link href="/connect" className={`nav-link-minimal ${pathname === '/connect' ? 'active' : ''}`}>Connect</Link>
         <Link href="/profile" className={`nav-link-minimal ${pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
       </div>
     </header>
