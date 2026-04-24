@@ -82,7 +82,8 @@ export default function GroupsPage() {
           <p className="section-subtitle-minimal">Synchronize with peers and co-search specific fields</p>
         </div>
         <button
-          className="filter-chip-minimal active"
+          className="btn-premium-minimal active"
+          style={{ background: 'var(--gradient-primary)', color: '#fff', padding: '12px 24px', fontSize: '13px' }}
           onClick={() => setShowCreateModal(true)}
           id="create-group-btn"
         >
@@ -121,8 +122,8 @@ export default function GroupsPage() {
                 {group.member_count} synchronizing
               </div>
               <div style={{ display: 'flex', gap: '12px' }}>
-                <button className="nav-link-minimal" style={{ fontSize: '12px', borderBottom: '1px solid var(--border-subtle)' }}>Join</button>
-                <button className="nav-link-minimal" style={{ fontSize: '12px', color: 'var(--text-primary)' }}>Open ↗</button>
+                <button className="btn-premium-minimal secondary" style={{ fontSize: '12px', padding: '8px 16px', borderRadius: '8px' }}>Join</button>
+                <button className="btn-premium-minimal" style={{ fontSize: '12px', padding: '8px 16px', borderRadius: '8px', background: 'var(--bg-glass-hover)' }}>Open ↗</button>
               </div>
             </div>
           </div>
@@ -165,8 +166,8 @@ export default function GroupsPage() {
             </div>
 
             <div style={{ display: 'flex', gap: '16px', marginTop: '40px', justifyContent: 'flex-end' }}>
-              <button className="nav-link-minimal" onClick={() => setShowCreateModal(false)}>Discard</button>
-              <button className="filter-chip-minimal active" onClick={() => setShowCreateModal(false)}>Initialize</button>
+              <button className="btn-premium-minimal secondary" style={{ padding: '10px 24px', fontSize: '13px' }} onClick={() => setShowCreateModal(false)}>Discard</button>
+              <button className="btn-premium-minimal active" style={{ background: 'var(--gradient-primary)', color: '#fff', padding: '10px 24px', fontSize: '13px' }} onClick={() => setShowCreateModal(false)}>Initialize</button>
             </div>
           </div>
         </div>

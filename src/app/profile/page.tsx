@@ -164,7 +164,9 @@ export default function ProfilePage() {
             {activeTab === 'groups' && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '300px', border: '1px dashed #222', borderRadius: '16px' }}>
                 <div style={{ fontSize: '14px', color: '#666', marginBottom: '16px' }}>No research clusters joined</div>
-                <Link href="/groups" className="filter-chip-minimal active" style={{ background: 'var(--gradient-primary)' }}>Explore Clusters</Link>
+                <Link href="/groups" className="btn-premium-minimal active" style={{ background: 'var(--gradient-primary)', color: '#fff', padding: '10px 24px', fontSize: '13px', textDecoration: 'none' }}>
+                  Explore Clusters
+                </Link>
               </div>
             )}
           </div>

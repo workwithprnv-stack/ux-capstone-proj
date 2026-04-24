@@ -1,0 +1,39 @@
+/* 
+  Place your licensed font files in /public/fonts/ and they will be loaded here.
+  Required files:
+  - acme-gothic-bold.woff2
+  - avenir-next-regular.woff2
+  - avenir-next-medium.woff2
+*/
+
+@font-face {
+  font-family: 'Acme Gothic';
+  src: url('/fonts/acme-gothic-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('/fonts/avenir-next-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('/fonts/avenir-next-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('/fonts/avenir-next-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
