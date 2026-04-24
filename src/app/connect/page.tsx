@@ -116,8 +116,9 @@ export default function ConnectPage() {
               className="planet-wrapper" 
               style={{ 
                 animationDuration: `${res.orbitSpeed}s`,
-                animationDelay: `-${(res.startAngle / 360) * res.orbitSpeed}s`
-              }}
+                animationDelay: `-${(res.startAngle / 360) * res.orbitSpeed}s`,
+                transformOrigin: `20px calc(${res.orbitRadiusY}px + 20px)`
+              } as React.CSSProperties}
             >
               <div 
                 className="profile-planet"
@@ -135,7 +136,7 @@ export default function ConnectPage() {
       {selectedResearcher && (
         <div className="modal-overlay" onClick={() => setSelectedResearcher(null)}>
           <div className="modal-card" onClick={e => e.stopPropagation()}>
-            <div className="modal-header">
+            <div className="modal-header" style={{ display: 'flex', gap: '24px', alignItems: 'center', marginBottom: '32px' }}>
               <div className="avatar-circle">{selectedResearcher.avatar}</div>
               <div className="header-text">
                 <h2 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '4px' }}>{selectedResearcher.name}</h2>
@@ -159,14 +160,14 @@ export default function ConnectPage() {
             <div className="modal-actions" style={{ marginTop: '40px', display: 'flex', gap: '16px' }}>
               <button 
                 className="btn-premium-minimal secondary"
-                style={{ flex: 1, padding: '16px', fontSize: '13px', border: '1px solid #333' }}
+                style={{ flex: 1, padding: '16px', fontSize: '13px', border: '1px solid #333', background: 'transparent', color: '#fff', borderRadius: '12px' }}
                 onClick={() => setSelectedResearcher(null)}
               >
                 Discard
               </button>
               <button 
                 className="btn-premium-minimal active" 
-                style={{ flex: 2, padding: '16px', fontSize: '13px', background: 'var(--gradient-primary)', color: '#fff' }}
+                style={{ flex: 2, padding: '16px', fontSize: '13px', background: 'var(--gradient-primary)', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: '700' }}
                 onClick={() => handleConnect(selectedResearcher.id)}
                 disabled={connecting === selectedResearcher.id}
               >
@@ -176,195 +177,6 @@ export default function ConnectPage() {
           </div>
         </div>
       )}
-
-      <style jsx>{`
-        .connect-galaxy-wrapper {
-          position: relative;
-          background: #000;
-          height: 100vh;
-          width: 100vw;
-          overflow: hidden;
-        }
-
-        .clean-starfield {
-          position: absolute;
-          inset: 0;
-          background: 
-            radial-gradient(1px 1px at 10% 20%, #fff 100%, transparent),
-            radial-gradient(1px 1px at 15% 70%, #fff 80%, transparent),
-            radial-gradient(1.5px 1.5px at 30% 40%, rgba(255,255,255,0.8) 100%, transparent),
-            radial-gradient(1px 1px at 50% 50%, #fff 100%, transparent),
-            radial-gradient(1px 1px at 70% 30%, #fff 70%, transparent),
-            radial-gradient(1.2px 1.2px at 85% 85%, #fff 100%, transparent);
-          background-size: 350px 350px;
-          opacity: 0.15;
-        }
-
-        .galaxy-center {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          z-index: 20;
-        }
-
-        .center-glow {
-          position: absolute;
-          width: 400px;
-          height: 400px;
-          background: radial-gradient(circle, rgba(220, 105, 168, 0.1) 0%, transparent 70%);
-          transform: translate(-50%, -50%);
-        }
-
-        .saturn-hub {
-          position: relative;
-          filter: drop-shadow(0 0 30px rgba(220, 105, 168, 0.3));
-        }
-
-        .user-hub-tag {
-          position: absolute;
-          bottom: -40px;
-          left: 50%;
-          transform: translateX(-50%);
-          font-size: 10px;
-          letter-spacing: 0.5em;
-          color: #DC69A8;
-          font-weight: 700;
-        }
-
-        .orbits-container {
-          position: absolute;
-          inset: 0;
-          z-index: 10;
-        }
-
-        .orbit-ring {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          border: 1.5px solid rgba(255, 255, 255, 0.12); /* More visible */
-          border-radius: 50%;
-          pointer-events: none;
-        }
-
-        .planet-wrapper {
-          position: absolute;
-          top: -20px;
-          left: 50%;
-          width: 40px;
-          height: 40px;
-          margin-left: -20px;
-          pointer-events: auto;
-          animation: orbitRotate linear infinite;
-        }
-
-        .orbit-ring:nth-child(1) .planet-wrapper { transform-origin: 20px calc(120px + 20px); }
-        .orbit-ring:nth-child(2) .planet-wrapper { transform-origin: 20px calc(180px + 20px); }
-        .orbit-ring:nth-child(3) .planet-wrapper { transform-origin: 20px calc(250px + 20px); }
-        .orbit-ring:nth-child(4) .planet-wrapper { transform-origin: 20px calc(150px + 20px); }
-
-        @keyframes orbitRotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-        .profile-planet {
-          width: 40px;
-          height: 40px;
-          background: var(--gradient-primary);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          font-weight: 800;
-          font-size: 12px;
-          cursor: pointer;
-          position: relative;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .profile-planet:hover {
-          transform: scale(1.4);
-          box-shadow: 0 0 30px rgba(220, 105, 168, 0.4);
-          z-index: 100;
-        }
-
-        .planet-hover-label {
-          position: absolute;
-          top: 50px;
-          white-space: nowrap;
-          background: #000;
-          color: #fff;
-          padding: 4px 10px;
-          border-radius: 4px;
-          font-size: 10px;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          pointer-events: none;
-        }
-
-        .profile-planet:hover .planet-hover-label {
-          opacity: 1;
-        }
-
-        .modal-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.9);
-          backdrop-filter: blur(8px);
-          z-index: 1000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .modal-card {
-          background: #0a0a0a;
-          border: 1px solid #1a1a1a;
-          width: 90%;
-          max-width: 500px;
-          border-radius: 20px;
-          padding: 40px;
-          box-shadow: 0 30px 100px rgba(0,0,0,1);
-        }
-
-        .avatar-circle {
-          width: 60px;
-          height: 60px;
-          background: var(--gradient-primary);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 900;
-          font-size: 20px;
-        }
-
-        /* Re-using premium minimal button styles */
-        .btn-premium-minimal {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 12px;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          text-transform: uppercase;
-        }
-
-        .btn-premium-minimal:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        .btn-premium-minimal:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-      `}</style>
     </div>
   );
 }
