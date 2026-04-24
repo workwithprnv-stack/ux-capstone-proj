@@ -193,6 +193,66 @@ export default function PaperDetailPage() {
         <CitationGraph paper={paper} />
       </div>
 
+      {/* Research Collaboration Matrix */}
+      <div style={{ marginBottom: '80px', display: 'grid', gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)', gap: '40px' }}>
+        {/* Discussion Area */}
+        <div style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-subtle)', borderRadius: '24px', padding: '32px' }}>
+          <h3 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ color: 'var(--accent-primary)' }}>//</span> PEER DISCUSSION
+          </h3>
+          <div style={{ marginBottom: '24px', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', padding: '16px' }}>
+            <p style={{ color: '#666', fontSize: '13px', fontStyle: 'italic', textAlign: 'center' }}>No peer discussions started yet. Be the first to provide insight on this discovery.</p>
+          </div>
+          <div style={{ position: 'relative' }}>
+            <textarea 
+              placeholder="Contribution to discussion... (Markdown supported)"
+              style={{ width: '100%', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', padding: '16px', color: '#fff', fontSize: '14px', minHeight: '100px', outline: 'none', resize: 'vertical' }}
+            />
+            <button className="btn-premium-minimal" style={{ position: 'absolute', bottom: '12px', right: '12px', padding: '8px 20px', fontSize: '11px', background: 'var(--accent-primary)', border: 'none', color: '#fff' }}>
+              SUBMIT INSIGHT
+            </button>
+          </div>
+        </div>
+
+        {/* Metrics & Actions */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {/* Reaction Matrix */}
+          <div style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-subtle)', borderRadius: '24px', padding: '24px' }}>
+            <h3 style={{ fontSize: '12px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '20px' }}>Scholarly Reactions</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              {[
+                { label: 'Significant', icon: '✨', count: 12 },
+                { label: 'Reproducible', icon: '🧪', count: 8 },
+                { label: 'Foundational', icon: '🏛️', count: 15 },
+                { label: 'Provocative', icon: '🔥', count: 4 }
+              ].map(react => (
+                <button key={react.label} className="nav-mode-btn" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: '12px', borderRadius: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
+                  <span style={{ fontSize: '18px' }}>{react.icon}</span>
+                  <span style={{ fontSize: '10px', color: '#888', fontWeight: '600' }}>{react.label}</span>
+                  <span style={{ fontSize: '9px', color: 'var(--accent-primary)' }}>{react.count}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Social & Export */}
+          <div style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-subtle)', borderRadius: '24px', padding: '24px' }}>
+            <h3 style={{ fontSize: '12px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '20px' }}>Export / Share</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <button className="tab-btn-minimal" style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 16px', background: 'rgba(255,255,255,0.03)' }}>
+                <span>📋</span> Copy BibTeX Citation
+              </button>
+              <button className="tab-btn-minimal" style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 16px', background: 'rgba(255,255,255,0.03)' }}>
+                <span>🔗</span> Share to Network
+              </button>
+              <button className="tab-btn-minimal" style={{ width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 16px', background: 'rgba(255,255,255,0.03)' }}>
+                <span>🗂️</span> Export to Mendeley / Zotero
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Related Papers */}
       {relatedPapers.length > 0 && (
         <div id="related-papers" style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '60px' }}>
